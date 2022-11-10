@@ -169,6 +169,6 @@ int main(){
     std::cout<<std::endl<<"Запускаємо тести"<<std::endl;
     test();
 
-    delete arr;//вивільнення пам'яті
+    delete[] arr;//вивільнення пам'яті
     return 0;
 }
