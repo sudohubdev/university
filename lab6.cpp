@@ -65,7 +65,7 @@ std::wstring task1(std::wstring in)
     std::wstring out = L"";
     for (wchar_t &chr : in)
     {
-        if (!std::iswalpha(chr) && chr < 128 && 0)
+        if (!std::iswalpha(chr) && chr < 128)
             continue;
 
         if (out.find(chr) == std::wstring::npos)
@@ -78,7 +78,7 @@ bool test()
 {
     // test task1
     std::wstring test1 = L"скажи слово паляниця";
-    std::wstring test1_out = L"скажи ловпянц";
+    std::wstring test1_out = L"скажиловпянц";
     std::wstring test1_res = task1(test1);
     if (test1_res != test1_out)
     {
