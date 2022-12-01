@@ -44,7 +44,7 @@ class DOMIO extends AbstractIO {
         this.output = this.output.bind(this);
         this.input = this.input.bind(this);
     }
-    async input(data) {
+    async input(data, type = 'text') {
         this.output(data);
         let promise = new Promise((resolve, reject) => {
             this.btn.onclick = () => {
@@ -52,7 +52,19 @@ class DOMIO extends AbstractIO {
                 span.innerHTML = `&#60; ${this.in.value}`;
                 this.parent.appendChild(span);
                 this.btn.onclick = null;
-                resolve(this.in.value);
+                switch (type) {
+                    case 'number':
+                    case 'число':
+                        resolve(Number(this.in.value));
+                        break;
+                    case 'array':
+                    case 'масив':
+                        resolve(this.in.value.split(',').map(x => Number(x)));
+                        break;
+                    default:
+                        resolve(this.in.value);
+                        break;
+                }
             };
         });
         return promise;
