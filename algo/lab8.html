@@ -14,7 +14,7 @@
     <!--code highlight-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <title>Lab7</title>
+    <title>Lab8</title>
     <script src="lib.js"></script>
 </head>
 
@@ -30,14 +30,14 @@
         </p>
         <p style="margin-top:min(max(50px,30vh),70px)"></p>
         <p>
-            Лабораторна робота №7
+            Лабораторна робота №8
             <br>
             <span class="tab">
                 з дисципліни: <i>«Теорія алгоритмів»</i>
             </span>
         </p>
         <p>
-            <b>Тема:</b> Алгоритми сортування та пошуку
+            <b>Тема:</b> «Алгоритми для роботи з матрицями»
         </p>
         <p>
             Варіант №3
@@ -55,26 +55,24 @@
     </page>
 
     <page class="task">
-        <span><b>Тема:</b> Алгоритми сортування та пошуку</span>
-        <span><b>Мета:</b></span>
-        <ul>
-            <li>Отримання практичних навичок в обробці масивів, у сортуванні елементів масивів різними методами та за різними реквізитами.</li>
-            <li>Дослідження і вивчення методів пошуку ключових елементів у масивах.</li>
-            <li>Здійснення порівняння та аналізу ефективності використовуваних методів сортування і пошуку.</li>
-        </ul>
+        <span><b>Тема:</b> «Алгоритми для роботи з матрицями»</span>
+        <span><b>Мета:</b> Навчитися розробляти алгоритми для роботи з матрицями.</span>
         <b>Індивідуальне завдання:</b>
         <div class="p">
-            3. Ввести одновимірний масив з n елементів. Знайти кількість нулів і одиниць. Відсортувати масив по зростанню, методом вставкою.
+            Скласти програму, яка вирішує задачу обробки двомірного масиву з додатковою умовою:
+            <br> • розмірність матриці повинна вводитися при виконанні програми.
+            <br> Заповнити матрицю, від лівого верхнього кута по спіралі: вправо - вниз - вліво - вгору.
+            <img src="img/8umova.png" alt="umova" width="250" style="float:right">
         </div>
         <b>Блок-схеми: (натисніть для збільшення)</b>
         <div class="carousel">
             <span class="arrleft" onclick="switchimg(-1)">&#10094;</span>
             <span class="arrright" onclick="switchimg(1)">&#10095;</span>
             <span class="numbertext">1 / 2</span>
-            <img src="img/7.1.png" alt="1">
-            <img src="img/7.2.png" alt="2" style="display:none">
+            <img src="img/8.1.png" alt="1">
+            <img src="img/8.2.png" alt="2" style="display:none">
         </div>
-        <b>Код програми, <a href="lab7.js">джерело</a></b>
+        <b>Код програми, <a href="lab8.js">джерело</a></b>
         <pre><code class="language-javascript program"></code></pre>
         <span>
             <button style="width:180px" class="callcode">Запустити програму</button>
@@ -100,7 +98,7 @@
                 document.querySelector(".input"),
                 document.querySelector(".stdinsend"));
 
-            let labCaller = new LabCaller("lab7", io);
+            let labCaller = new LabCaller("lab8", io);
             document.querySelector(".program").innerHTML = await labCaller.getCode();
             document.querySelectorAll("code").forEach((block) => {
                 hljs.highlightBlock(block);
