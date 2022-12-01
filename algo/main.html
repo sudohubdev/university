@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!--code highlight-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <title>Document</title>
+    <script src="lib.js"></script>
+</head>
+
+<body>
+    <page class="title">
+        <p>
+            МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ
+            <br> НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ
+        </p>
+        <p>
+            Факультет кібербезпеки, комп’ютерної та програмної інженерії
+            <br> Кафедра комп’ютерних інформаційних технологій
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <p>
+            Лабораторна робота №5
+            <br>
+            <span class="tab">
+                з дисципліни: <i>«Теорія алгоритмів»</i>
+            </span>
+        </p>
+        <p>
+            <b>Тема:</b> Основні структури блок-схем алгоритмів.
+        </p>
+        <p>
+            Варіант №3
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <div class="owner">
+            Виконав:
+            <br> Ст. ТП-116:1
+            <br> Вітязь Денис
+            <br> Перевірила: Володимирівна Горіна
+        </div>
+        <footer>
+            Київ 2022
+        </footer>
+    </page>
+
+    <page class="task">
+        <span><b>Тема:</b> Основні структури блок-схем алгоритмів.</span>
+        <span><b>Мета:</b> Ознайомитись з основними структурами блок-схем алгоритмів.</span>
+        <b>Індивідуальне завдання:</b>
+        <div class="p">
+            3. Поле шахівниці визначається парою натуральних чисел, кожне з яких не перевершує восьми: перше число – номер вертикалі (при рахунку зліва направо), друге – номер горизонталі (при рахунку від низу до верху). Дано натуральні числа k, l, m, n, кожне з
+            яких не перевершує восьми. На полі (k, l) розташований ферзь. Чи погрожує він полю (m, n).
+        </div>
+        <b>Блок-схеми:</b>
+        <img src="https://a.ppy.sh/3" alt="img">
+        <b>Код програми, <a href="lab6.js">джерело</a></b>
+        <pre><code class="language-javascript program"></code></pre>
+
+        <button style="width:180px">Запустити програму</button>
+        <div class="console">
+            <div class="data">
+                <span>// Стандартний вивід програми:</span>
+            </div>
+            <span style="display:flex;flex-direction:row;">
+                <input type="text" class="input execinput">
+                <button class="stdinsend">Надіслати</button>
+            </span>
+
+        </div>
+    </page>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async() => {
+            let io = new DOMIO(
+                document.querySelector(".console .data"),
+                document.querySelector(".input"),
+                document.querySelector(".stdinsend"));
+
+            let labCaller = new LabCaller("lab6", io);
+            document.querySelector(".program").innerHTML = await labCaller.getCode();
+            document.querySelectorAll("code").forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+            labCaller.call();
+        });
+    </script>
+</body>
+
+</html>
