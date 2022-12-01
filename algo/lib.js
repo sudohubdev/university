@@ -2,7 +2,7 @@
 //цей код тільки для інтерактивного режиму (не прив'язаний до алгоритмів)
 
 class AbstractIO {
-    constructor() {}
+    constructor() { }
     async input(data) {
         throw new Error("Not implemented");
     }
