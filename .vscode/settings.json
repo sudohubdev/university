@@ -52,6 +52,7 @@
         "locale": "cpp",
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
-        "cwctype": "cpp"
+        "cwctype": "cpp",
+        "vector": "cpp"
     }
 }
