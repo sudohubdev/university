@@ -1,8 +1,8 @@
 //тут знаходяться 'глобальні' функції, які використовуються в різних місцях
 //цей код тільки для інтерактивного режиму (не прив'язаний до алгоритмів)
-const AsyncFunction = (async function () { }).constructor;
+const AsyncFunction = (async function() {}).constructor;
 class AbstractIO {
-    constructor() { }
+    constructor() {}
     async input(data) {
         throw new Error("Not implemented");
     }
@@ -43,6 +43,7 @@ class DOMIO extends AbstractIO {
         this.in = input;
         this.output = this.output.bind(this);
         this.input = this.input.bind(this);
+        this.error = this.error.bind(this);
     }
     async input(data, type = 'text') {
         this.output(data);
@@ -134,8 +135,9 @@ class LabCaller {
             const output = IO.output;
             const error = IO.error;
         `;
-        let func = new AsyncFunction(IOstub + code + "\nawait output('Програма завершила роботу.');");
+        let func = new AsyncFunction(IOstub + code);
         await func.call(lab, IO);
+        await IO.output('Програма завершила роботу.');
     }
     async test() {
         for (let i = 0; i < 2; i++) {

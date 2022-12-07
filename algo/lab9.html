@@ -67,11 +67,9 @@
             <span class="arrleft " onclick="switchimg(-1) ">&#10094;</span>
             <span class="arrright " onclick="switchimg(1) ">&#10095;</span>
             <span class="numbertext ">1 / 2</span>
-            <img src="img/9.1.png " alt="1 ">
-            <img src="img/9.2.png " alt="2 " style="display:none ">
-            <img src="img/9.3.png " alt="3 " style="display:none ">
+            <img src="img/9.1.png" alt="1 ">
         </div>
-        <b>Код програми, <a href="lab9.js ">джерело</a></b>
+        <b>Код програми, <a href="lab9.js">джерело</a></b>
         <pre><code class="language-javascript program "></code></pre>
         <span>
             <button style="width:180px " class="callcode ">Запустити програму</button>
@@ -89,32 +87,32 @@
 
         </div>
         <div class="conclusion ">
-            <b>Висновок:</b> Я навчився розробляти алгоритми для роботи з матрицями, опрацьовуючи двовимірні масиви у циклі for.
+            <b>Висновок:</b> Я навчився розробляти рекурсивні алгоритми.
         </div>
     </page>
 
     <script>
-        document.addEventListener("DOMContentLoaded ", async() => {
+        document.addEventListener("DOMContentLoaded", async() => {
             let io = new DOMIO(
-                document.querySelector(".console .data "),
-                document.querySelector(".input "),
-                document.querySelector(".stdinsend "));
+                document.querySelector(".console .data"),
+                document.querySelector(".input"),
+                document.querySelector(".stdinsend"));
 
-            let labCaller = new LabCaller("lab9 ", io);
-            document.querySelector(".program ").innerHTML = await labCaller.getCode();
-            document.querySelectorAll("code ").forEach((block) => {
+            let labCaller = new LabCaller("lab9", io);
+            document.querySelector(".program").innerHTML = await labCaller.getCode();
+            document.querySelectorAll("code").forEach((block) => {
                 hljs.highlightBlock(block);
             });
-            document.querySelector("button.callcode ").addEventListener("click ", () => {
+            document.querySelector("button.callcode").addEventListener("click", () => {
                 document.querySelectorAll(".console .data>span:not(:first-child)").forEach(el => el.remove());
                 labCaller.call();
             });
             document.querySelector("button.callcodetest").addEventListener("click", () => {
-                document.querySelectorAll(".console.data > span: not(: first - child)").forEach(el => el.remove());
+                document.querySelectorAll(".console .data>span:not(:first-child)").forEach(el => el.remove());
                 labCaller.test();
             });
             document.querySelector("button.clearconsole").addEventListener("click", () => {
-                document.querySelectorAll(".console.data > span ").forEach(el => el.remove());
+                document.querySelectorAll(".console .data>span").forEach(el => el.remove());
             });
             switchimg(0);
         });
@@ -130,8 +128,7 @@
             }
             imgs[i].style.display = "none";
             imgs[(i + direction + imgs.length) % imgs.length].style.display = "block";
-            document.querySelector(".carousel .numbertext").innerHTML = ` ${(i + direction
-                + imgs.length) % imgs.length + 1} / ${imgs.length}`;
+            document.querySelector(".carousel .numbertext").innerHTML = `${(i + direction + imgs.length) % imgs.length + 1} / ${imgs.length}`;
         }
         document.querySelector(".carousel").addEventListener("click", (e) => {
             if (e.target.tagName == "IMG") {
