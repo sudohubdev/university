@@ -6,7 +6,7 @@
     "configurations": [
         //g++ compile
         {
-            "name": "(gdb) Launch",
+            "name": "Run your code UwU",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
@@ -24,29 +24,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++.exe сборка активного файла"
-        },
-        //g++ macos
-        {
-            "name": "(gdb) Launch MacOS",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: g++ MacOS build"
+            "preLaunchTask": "create c++ shitcode"
         }
     ]
 }

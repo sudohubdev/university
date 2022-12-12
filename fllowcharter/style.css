@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media(prefers-color-scheme: dark) {
+    body {
+        background-color: #222;
+        color: #fff;
+    }
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.code {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 400px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.chart {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    width: 400px;
+    max-width: 100%;
+}
+
+.drag {
+    position: absolute;
+    left: -4px;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    cursor: w-resize;
+}
