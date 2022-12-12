@@ -96,6 +96,23 @@ div.p {
     cursor: zoom-in;
 }
 
+@media print {
+    .carousel img {
+        width: 100%;
+        height: auto;
+        display: block !important;
+    }
+    .carousel .arrleft {
+        display: none;
+    }
+    .carousel .arrright {
+        display: none;
+    }
+    .carousel .numbertext {
+        display: none;
+    }
+}
+
 .carousel .arrleft {
     position: absolute;
     left: 10px;
