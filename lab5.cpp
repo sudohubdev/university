@@ -57,6 +57,8 @@ void printarr(int (&arr)[SIZE][SIZE])
     }
 }
 
+//
+
 /*задачі*/
 unsigned int task1(int (&arr)[SIZE][SIZE])
 {
@@ -72,7 +74,7 @@ unsigned int task1(int (&arr)[SIZE][SIZE])
         }
     return sum;
 }
-
+//
 bool test()
 {
     // test task1
