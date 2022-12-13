@@ -1,4 +1,6 @@
 {
+    //c++20
+    "C_Cpp.default.cppStandard": "c++17",
     "files.associations": {
         "*.html": "html",
         "iomanip": "cpp",
@@ -53,6 +55,7 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "cwctype": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "fstream": "cpp"
     }
 }
