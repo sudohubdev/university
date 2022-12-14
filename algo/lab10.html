@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!--description for messengers-->
+    <meta property="og:title" content="Вітязь Денис лабораторна">
+    <meta property="og:description" content="Лабораторна робота з дисципліни: «Теорія алгоритмів», має функціонал самозахисту">
+    <meta property="og:image" content="https://uni.sudohub.dev/favicon.ico">
+    <meta property="og:url" content="https://uni.sudohub.dev">
+    <!--code highlight-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <title>Lab10</title>
+    <script src="lib.js"></script>
+</head>
+
+<body>
+    <page class="title">
+        <p>
+            МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ
+            <br> НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ
+        </p>
+        <p>
+            Факультет кібербезпеки, комп’ютерної та програмної інженерії
+            <br> Кафедра комп’ютерних інформаційних технологій
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <p>
+            Лабораторна робота №10
+            <br>
+            <span class="tab">
+                з дисципліни: <i>«Теорія алгоритмів»</i>
+            </span>
+        </p>
+        <p>
+            <b>Тема:</b> Фундаментальні алгоритми на графах та деревах.
+        </p>
+        <p>
+            Варіант №3
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <div class="owner">
+            Виконав:
+            <br> Ст. ТП-116:1
+            <br> Вітязь Денис
+            <br> Перевірила: Володимирівна Горіна
+        </div>
+        <footer>
+            Київ 2022
+        </footer>
+    </page>
+
+    <page class="task">
+        <span><b>Тема:</b> Фундаментальні алгоритми на графах та деревах.</span>
+        <span><b>Мета:</b> Навчитися розробляти Фундаментальні алгоритми на графах та деревах.</span>
+        <b>Індивідуальне завдання:</b>
+        <div class="p">
+            Скласти програму, яка обходить граф за алгоритмом Дейкстри.
+            <img src="img/10umova.png" alt="umova" width="40%">
+        </div>
+        <b>Блок-схеми: (натисніть для збільшення) <a href="lab10.vsdx ">lab10.vsdx</a></b>
+        <div class="carousel ">
+            <span class="arrleft " onclick="switchimg(-1) ">&#10094;</span>
+            <span class="arrright " onclick="switchimg(1) ">&#10095;</span>
+            <span class="numbertext ">1 / 2</span>
+            <img src="img/10a.png" alt="1 ">
+            <img src="img/10b.png" alt="2 " style="display:none ">
+            <img src="img/10chart.png" alt="блок схема" style="display:none ">
+        </div>
+        <b>Код програми, <a href="lab10.js">джерело</a></b>
+        <pre><code class="language-javascript program "></code></pre>
+        <span>
+            <button style="width:180px " class="callcode ">Запустити програму</button>
+            <!--<button style="width:180px " class="callcodetest ">загрузити 2 приклади</button>-->
+            <button style="width:180px " class="clearconsole ">Почистити вивід</button>
+        </span>
+        <div class="console ">
+            <div class="data ">
+                <span>// Стандартний вивід програми:</span>
+            </div>
+            <span style="display:flex;flex-direction:row; ">
+                <input type="text " class="input execinput ">
+                <button class="stdinsend ">Надіслати</button>
+            </span>
+
+        </div>
+        <div class="conclusion ">
+            <b>Висновок:</b> Я навчився розробляти Фундаментальні алгоритми на графах та деревах.
+        </div>
+    </page>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async() => {
+            let io = new DOMIO(
+                document.querySelector(".console .data"),
+                document.querySelector(".input"),
+                document.querySelector(".stdinsend"));
+
+            let labCaller = new LabCaller("lab10", io);
+            document.querySelector(".program").innerHTML = await labCaller.getCode();
+            document.querySelectorAll("code").forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+            document.querySelector("button.callcode").addEventListener("click", () => {
+                document.querySelectorAll(".console .data>span:not(:first-child)").forEach(el => el.remove());
+                labCaller.call();
+            });
+            document.querySelector("button.callcodetest").addEventListener("click", () => {
+                document.querySelectorAll(".console .data>span:not(:first-child)").forEach(el => el.remove());
+                labCaller.test();
+            });
+            document.querySelector("button.clearconsole").addEventListener("click", () => {
+                document.querySelectorAll(".console .data>span").forEach(el => el.remove());
+            });
+            switchimg(0);
+        });
+
+        function switchimg(direction) {
+            let imgs = document.querySelectorAll(".carousel img");
+            let i = 0;
+            for (; i <
+                imgs.length; i++) {
+                if (imgs[i].style.display != "none") {
+                    break;
+                }
+            }
+            imgs[i].style.display = "none";
+            imgs[(i + direction + imgs.length) % imgs.length].style.display = "block";
+            document.querySelector(".carousel .numbertext").innerHTML = `${(i + direction + imgs.length) % imgs.length + 1} / ${imgs.length}`;
+        }
+        document.querySelector(".carousel").addEventListener("click", (e) => {
+            if (e.target.tagName == "IMG") {
+                let magimg = document.createElement("img");
+                magimg.src = e.target.src;
+                magimg.style.position = "fixed";
+                magimg.style.top = "50%";
+                magimg.style.left = "50%";
+                magimg.style.transform = "translate(-50%,-50%)";
+                magimg.style.width = "100vw";
+                magimg.style.height = "100vh";
+                magimg.style.objectFit = "contain";
+                magimg.style.zIndex = "100";
+                magimg.style.cursor = "pointer";
+                magimg.style.backdropFilter = "blur(5px)";
+                document.body.appendChild(magimg);
+                magimg.addEventListener("click", () => {
+                    document.body.removeChild(magimg);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
