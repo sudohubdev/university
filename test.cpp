@@ -1,56 +1,29 @@
 #include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <string>
-#include <locale>
-#include <wchar.h>
-#include <cwctype>
-
 using namespace std;
 int main()
 {
     int x;
-    cout << "Введіть кількість рядків: ";
+    cout << "GIVE ME YOUR GRADE OR SPANKIE";
     cin >> x;
-    int y;
-    cout << "Введіть кількість стовпців: ";
-    cin >> y;
-    int **Arr = new int *[y];
-    for (int i = 0; i < y; ++i)
+    if (92 <= x && x <= 100)
     {
-        Arr[i] = new int[x];
+        cout << "Excelent! you got an A";
     }
-    int **Arr1 = new int *[x];
-    for (int i = 0; i < x; ++i)
+    if (83 <= x && x <= 91)
     {
-        Arr1[i] = new int[y];
+        cout << "Good job!, B is nice";
     }
-    for (int i = 0; i < x; i++)
+    if (75 <= x && x <= 82)
     {
-
-        for (int j = 0; j < y; j++)
-        {
-            Arr[j][i] = rand() % 10;
-            cout << setw(5) << Arr[j][i] << " ";
-        }
-        cout << endl;
+        cout << "C, atleast you pass, it's ok";
     }
-
-    for (int i = 0; i < y; i++)
+    if (0 <= x && x < 75)
     {
-        for (int j = 0; j < x; j++)
-        {
-            Arr1[x-1-j][i] = Arr[j][i];
-        }
+        cout << "D?? SPANKING TIME";
     }
-    cout << endl;
-
-    for (int i = 0; i < y; i++)
+    if (x > 100 or x < 0)
     {
-        for (int j = 0; j < x; j++)
-        {
-            cout << Arr1[j][i] << " ";
-        }
-        cout << endl;
+        cout << "shit lie, tell truth!";
     }
+    system("pause");
 }
