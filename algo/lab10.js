@@ -17,8 +17,9 @@ var graph = [
 ]
 
 //алгоритм Дейкстри
+
+var dist = []; //відстань від початку до кожної вершини
 async function dijkstra(graph, points, start) {
-    var dist = []; //відстань від початку до кожної вершини
     var prev = []; //попередня вершина
     var visited = []; //відвідані вершини
     var path = []; //шлях
@@ -95,5 +96,5 @@ async function dijkstra(graph, points, start) {
 var pathes = await dijkstra(graph, points, 1);
 
 for (var i = 0; i < pathes.length; i++) {
-    output("d(" + points[i] + ") = " + pathes[i]);
+    output("d(" + points[i] + ") = " + pathes[i] + " (вага = " + dist[points[i]] + ")");
 }
