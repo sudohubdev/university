@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="algo/style.css">
+    <!--description for messengers-->
+    <meta property="og:title" content="Вітязь Денис лабораторна">
+    <meta property="og:description" content="Лабораторна робота з дисципліни: «Теорія алгоритмів», має функціонал самозахисту">
+    <meta property="og:image" content="https://uni.sudohub.dev/favicon.ico">
+    <meta property="og:url" content="https://uni.sudohub.dev">
+    <title>Lab Vitiaz Denys 116</title>
+</head>
+
+<body>
+    <page class="title">
+        <p>
+            МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ
+            <br> НАЦІОНАЛЬНИЙ АВІАЦІЙНИЙ УНІВЕРСИТЕТ
+        </p>
+        <p>
+            Факультет кібербезпеки, комп’ютерної та програмної інженерії
+            <br> Кафедра комп’ютерних інформаційних технологій
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <p>
+            Лабораторна робота №%no%
+            <br>
+            <span class="tab">
+                з дисципліни: <i>%subj%</i>
+            </span>
+        </p>
+        <p>
+            <b>Тема:</b> %topic%
+        </p>
+        <p>
+            Варіант №3
+        </p>
+        <p style="margin-top:min(max(50px,30vh),70px)"></p>
+        <div class="owner">
+            Виконав:
+            <br> Ст. ТП-116:1
+            <br> Вітязь Денис
+            <br> Перевірила: %teacher%
+        </div>
+        <footer>
+            Київ 2023
+        </footer>
+    </page>
+
+    <page class="task">
+        <span><b>Мета:</b> Навчитися робити %topic%</span>
+        <b>Індивідуальне завдання:</b>
+        <b>Зображення до роботи:</b>
+        <div class="carousel">
+            <span class="arrleft " onclick="switchimg(-1) ">&#10094;</span>
+            <span class="arrright " onclick="switchimg(1) ">&#10095;</span>
+            <span class="numbertext ">1 / 2</span>
+        </div>
+        <div class="conclusion ">
+            <b>Висновок:</b> %concl%
+        </div>
+    </page>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async() => {
+            let query = window.location.search;
+            let urlParams = new URLSearchParams(query);
+            let no = urlParams.get('no');
+            let subj = urlParams.get('subj');
+            let topic = urlParams.get('topic');
+            let concl = urlParams.get('concl');
+            let teacher = urlParams.get('teacher');
+            let usetask = urlParams.get('usetask');
+            let pics = urlParams.get('pics');
+            if (usetask == null || usetask == "false" && usetask == "0") {
+                document.querySelector(".task").style.display = "none";
+            } else {
+                let picsurls = pics.split(",");
+                for (let i = 0; i < picsurls.length; i++) {
+                    console.log(picsurls[i]);
+                    let img = document.createElement("img");
+                    img.src = picsurls[i];
+                    img.alt = i + 1;
+                    img.style.display = "none";
+                    document.querySelector(".carousel").appendChild(img);
+                }
+                document.querySelector(".carousel img").style.display = "block";
+            }
+            console.log(no, subj, topic, concl, teacher);
+            document.body.innerHTML = document.body.innerHTML
+                .replace(/\%no\%/g, no)
+                .replace(/\%subj\%/g, subj)
+                .replace(/\%topic\%/g, topic)
+                .replace(/\%concl\%/g, concl)
+                .replace(/\%teacher\%/g, teacher);
+        });
+
+
+        function switchimg(direction) {
+            let imgs = document.querySelectorAll(".carousel img");
+            let i = 0;
+            for (; i < imgs.length; i++) {
+                if (imgs[i].style.display != "none") {
+                    break;
+                }
+            }
+            imgs[i].style.display = "none";
+            imgs[(i + direction + imgs.length) % imgs.length].style.display = "block";
+            document.querySelector(".carousel .numbertext").innerHTML = `${(i + direction + imgs.length) % imgs.length + 1} / ${imgs.length}`;
+        }
+        document.querySelector(".carousel").addEventListener("click", (e) => {
+            if (e.target.tagName == "IMG") {
+                let magimg = document.createElement("img");
+                magimg.src = e.target.src;
+                magimg.style.position = "fixed";
+                magimg.style.top = "50%";
+                magimg.style.left = "50%";
+                magimg.style.transform = "translate(-50%,-50%)";
+                magimg.style.width = "100vw";
+                magimg.style.height = "100vh";
+                magimg.style.objectFit = "contain";
+                magimg.style.zIndex = "100";
+                magimg.style.cursor = "pointer";
+                magimg.style.backdropFilter = "blur(5px)";
+                document.body.appendChild(magimg);
+                magimg.addEventListener("click", () => {
+                    document.body.removeChild(magimg);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
