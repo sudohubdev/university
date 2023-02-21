@@ -100,6 +100,8 @@
                 .replace(/\%topic\%/g, topic)
                 .replace(/\%concl\%/g, concl)
                 .replace(/\%teacher\%/g, teacher);
+
+            document.head.innerHTML = document.head.innerHTML.replace(/\%topic\%/g, topic)
         });
 
 
