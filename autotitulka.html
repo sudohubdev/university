@@ -75,6 +75,10 @@
             let teacher = urlParams.get('teacher');
             let usetask = urlParams.get('usetask');
             let pics = urlParams.get('pics');
+            let male = urlParams.get("male");
+            if (!(male == null || usetask == "false" && usetask == "0"))
+                document.querySelector(".owner").innerHTML = document.querySelector(".owner").innerHTML.replace("Перевірила:", "Перевірив:");
+
             if (usetask == null || usetask == "false" && usetask == "0") {
                 document.querySelector(".task").style.display = "none";
             } else {
