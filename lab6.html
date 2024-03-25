@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        body{
+            background-color: #444;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            /*make grid occupy all available space*/
+            width: 100%;
+            padding: 20px;
+            padding-top: 0;
+            height: 80%;
+        }
+
+        .card {
+            background-color: #555;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .user-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /*footer has 2 columns*/
+        footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            padding: 20px;
+            height: 20%;
+        }
+
+        h3{
+            background-color: purple;
+            width: fit-content;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="card">
+            <img class="user-picture" src="https://www.waifu.com.mx/wp-content/uploads/2023/05/Hatsune-Miku-Cover.jpg" alt="Alice's Picture">
+            <h2>Хацун Міку</h2>
+            <ul>
+                <li>Вік: 26</li>
+                <li>Стать: Жіноча</li>
+                <li>Місце проживання: Японія</li>
+                <li>Мови: Японська, Англійська</li>
+                <li>Посада: продюсер музики</li>
+                <li>Роль у нашому застосунку: <br><b>Другорядний корисутвач</b></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Коротка біографія</h3>
+            <p>Хацун Міку - 26-річна продюсерка музики у компанії Crypton Future Media.
+               Вона має великий досвід роботи з музикою, концертами та відео продакшеном.
+               Хацун Міку знає як керувати командою, та вирішувати проблеми офлайн.
+               Проте, через стрімку діджиталізацію світу та пандемією COVID-19, 
+               вона має труднощі з керуванням аудіовізуальними проектами онлайн.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Приорітети та цілі використання додатку</h3>
+            <p>Хацун Міку хоче використовувати додаток для:</p>
+            <ul>
+                <li>Керування проектами онлайн</li>
+                <li>Комунікації з командою</li>
+                <li>Планування концертів</li>
+                <li>Запису ідей (нотаток) на ходу</li>
+                <li>Взаємодія з декілької пристроїв</li>
+        </div>
+        <div class="card">
+            <h3>Потреби користувача</h3>
+            <p>Хацун Міку необхідно:</p>
+            <ul>
+                <li>Створювати та редагувати проекти онлайн</li>
+                <li>Керувати завданнями у стилі Kanban</li>
+                <li>Мати можливість створення нотаток</li>
+        </div>
+        <div class="card">
+            <h3>Побажання користувача</h3>
+            <p>Хацун Міку хоче, щоб додаток:</p>
+            <ul>
+                <li>Був інтуїтивно зрозумілим</li>
+                <li>Мав простий та зрозумілий інтерфейс</li>
+                <li>Був безпечним для корпоративних даних</li>
+                <li>Мав можливість працювати офлайн</li>
+                <li>Мав можливість синхронізації з іншими пристроями</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Страхи</h3>
+            <p>Хацун Міку боїться, що використання додатку може призвести до:</p>
+            <ul>
+                <li>Втрати даних</li>
+                <li>Витоку конфіденційної інформації</li>
+                <li>Втрати контролю над проектами</li>
+                <li>Vendor lock-in до одного постачальника</li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <div class="card">
+            <h3>Часто використовує:</h3>
+            <ul>
+                <li>Microsoft Teams</li>
+                <li>Google Docs</li>
+                <li>Slack</li>
+                <li>Evernote</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Рідко використовує:</h3>
+            <ul>
+                <li>Visual Studio Code</li>
+                <li>Microsoft Word</li>
+            </ul>
+    </footer>
+</body>
+</html>
