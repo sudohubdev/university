@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        body{
+            background-color: #444;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            /*make grid occupy all available space*/
+            width: 100%;
+            padding: 20px;
+            padding-top: 0;
+            height: 80%;
+        }
+
+        .card {
+            background-color: #555;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .user-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /*footer has 2 columns*/
+        footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            padding: 20px;
+            height: 20%;
+        }
+
+        h3{
+            background-color: purple;
+            width: fit-content;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="card">
+            <img class="user-picture" src="https://media.istockphoto.com/id/515264384/photo/portrait-of-senior-female-teacher-working-at-her-desk.jpg?s=612x612&w=0&k=20&c=AnoP19qlLY7UzVpgyqxxbp-TxIbDTgZAqelP_AX65R0=" alt="Alice's Picture">
+            <h2>Марія</h2>
+            <ul>
+                <li>Вік: 56</li>
+                <li>Стать: Жіноча</li>
+                <li>Місце проживання: Україна</li>
+                <li>Мови: Українська</li>
+                <li>Посада: Вихователь дитячого садка</li>
+                <li>Роль у нашому застосунку: <br><b>Не клієнт</b></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Коротка біографія</h3>
+            <p>Марія - 56 річна вихователька дитячого садка. Вона не дуже шарить у цифрових технологіях, використовуючи базові програми такі як Viber i WhatsApp. 
+                Вона використовує телефон для спілкування з родиною та друзями, а також для перегляду фотографій та відео. Марія не використовує соціальні мережі, такі як Facebook або Instagram.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Приорітети та цілі використання додатку</h3>
+            <p>Марія хоче використовувати додаток для:</p>
+            <ul>
+                <li>Ведення списку дітей та їхніх батьків</li>
+                <li>Зберігання контактів батьків</li>
+                <li>Записки, наприклад для обліку групи подовженого дня</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Потреби користувача</h3>
+            <p>Марії необхідно:</p>
+            <ul>
+                <li>Популярність програми серед батьків дітей</li>
+                <li>Відсутність наворотів</li>
+                <li>Можливість використання на телефоні</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Побажання користувача</h3>
+            <p>Марія хоче, щоб додаток:</p>
+            <ul>
+                <li>Мав простий та зрозумілий інтерфейс</li>
+                <li>Було легко поставити на мобілку</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Страхи</h3>
+            <p>Марія боїться, що використання додатку може призвести до:</p>
+            <ul>
+                <li>Надсилання неправильної інформації батькам</li>
+                <li>Щось випадково наклацати</li>
+                <li>Неможливості доступу у не підходящий момент</li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <div class="card">
+            <h3>Часто використовує:</h3>
+            <ul>
+                <li>Паперові записи</li>
+                <li>Viber</li>
+                <li>WhatsApp</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Рідко використовує:</h3>
+            <ul>
+                <li>Календар</li>
+                <li>Електронну пошту</li>
+            </ul>
+    </footer>
+</body>
+</html>
