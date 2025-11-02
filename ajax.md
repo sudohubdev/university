@@ -299,6 +299,9 @@ TrafficLightState* BlinkState::next() {
 }
 ```
 
+Ось і сам світлофор у роботі:
+![VID_20251011_002334](https://github.com/user-attachments/assets/b41d53d7-5616-4da6-85dd-fea5bacd300b)
+
 # День 8: PCB design warcrimes
 
 У мене є пристрасть робити схеми не з готових модулів, а з підручних засобів.
