@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" title="Denys — Portfolio (Lab Edition)">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Vitiaz Denys" />
+    <meta name="description" content="Portfolio landing page — backend/fullstack developer (lab edition)." />
+    <meta name="keywords" content="portfolio, C#, ASP.NET, SQL Server, fullstack, backend, DevOps, Docker" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Social media meta tags-->
+    <meta property="og:title" content="Vitiaz Denys labwork">
+    <meta property="og:description"
+        content="Lab work for the subject: «WEB технології та WEB дизайн», has the self-defense functionality">
+    <meta property="og:image" content="https://sudohub.dev/favicon.ico">
+    <meta property="og:url" content="https://uni.sudohub.dev/4.2web/">
+
+    <!-- Important for hosting at the base URL -->
+    <base href="https://uni2.sudohub.dev/4.2web/" />
+
+    <title>Denys — Portfolio (Lab Edition)</title>
+    <link rel="stylesheet" href="https://uni2.sudohub.dev/4.2web/css/styles.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="header" id="top">
+            <!--marquee text. It is deprecated, but I couldn't resist showing it :)-->
+            <marquee behavior="alternate" scrollamount="4">
+                <font size="5"><b>Fusing your dreams into the code</b></font>
+            </marquee>
+
+            <div class="panel">
+                <!--The table-based layout was popular before. By the way, it's still sometimes used, for example, in emails-->
+                <table class="layout">
+                    <tr>
+                        <td style="width:160px; text-align:center;">
+                            <img src="img/headshot.png" alt="My photo" width="140"
+                                style="border:4px groove #999;" />
+                        </td>
+                        <td>
+                            <h1 style="margin:0;">Denys — Backend / Fullstack Developer</h1>
+                            <p class="muted" style="margin-top:6px;">
+                                4 years professional experience &#8226; programming since 13 &#8226; C#, ASP.NET, SQL
+                                Server &#8226;
+                                HTML/CSS/JS (vanilla + a bit of jQuery)
+                            </p>
+
+                            <span class="badge">macOS fan</span>
+                            <span class="badge">VS Code enjoyer</span>
+                            <span class="badge">Docker & Linux</span>
+                            <span class="badge">Networking / IPv6</span>
+                            <span class="badge">Embedded + soldering</span>
+
+                            <p>
+                                <b>Quick links:</b>
+                                <a href="#about" title="Jump to About section">About</a> |
+                                <a href="#skills" title="Jump to Skills section">Skills</a> |
+                                <a href="#highlights" title="Jump to Highlights section">Highlights</a> |
+                                <a href="projects.html" title="Open Projects page">Projects</a> |
+                                <a href="roadmap.html" title="Open Roadmap page">Roadmap</a> |
+                                <a href="creative.html" title="Open Creative page">Creative</a> |
+                                <a href="lab1.html" title="Lab-required tables page">Lab Tables</a> |
+                                <a href="contact.html" title="Open Contact page">Contact</a> |
+                                <a href="ua/index.html" title="Українська версія">UA</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="nav" id="menu">
+            <b>Navigation:</b>
+            <a href="#about">#about</a> |
+            <a href="#skills">#skills</a> |
+            <a href="#highlights">#highlights</a> |
+            <a href="#media">#media</a> |
+            <a href="#links">#links</a> |
+            <a href="#top">Back to top</a>
+        </div>
+
+        <div class="content">
+
+            <h2 id="about">About</h2>
+            <div class="panel">
+                <p>
+                    I’m a professional backend/fullstack developer with <b>4 years</b> of industry experience,
+                    coding since I was <b>13</b>. I enjoy designing systems that stay readable, testable, and scalable —
+                    even when requirements are chaotic.
+                </p>
+                <p>
+                    I’m strongest in <b>C# / ASP.NET</b> and <b>SQL Server</b>, but I’ve built and shipped solutions
+                    using
+                    <b>Java</b>, <b>Python</b>, and <b>Dart</b>. I’m comfortable in Linux environments, DevOps
+                    workflows,
+                    Docker-based deployments, and network-heavy setups (including <b>IPv6</b>).
+                </p>
+                <p class="small muted">
+                    Tip: This is a “lab edition” design on purpose — simple layout, visible anchors, multiple pages, and
+                    old-school vibes.
+                </p>
+                <p>
+                    <a href="#menu" title="Return to the navigation block">Return to menu</a>
+                </p>
+            </div>
+
+            <h2 id="skills">Skills snapshot</h2>
+            <div class="panel">
+                <ul>
+                    <li><b>Backend:</b> C#, ASP.NET, Web APIs, auth, caching, background jobs</li>
+                    <li><b>Data:</b> SQL Server (design, performance, indexing), migrations, reporting</li>
+                    <li><b>Web:</b> HTML/CSS/JS (vanilla), a bit of jQuery, basic UX</li>
+                    <li><b>Systems:</b> Linux, Docker, DevOps pipelines, networking (IPv6), troubleshooting</li>
+                    <li><b>Extra:</b> Embedded systems basics, soldering/hardware tinkering</li>
+                </ul>
+                <p><a href="#menu">Return to menu</a></p>
+            </div>
+
+            <h2 id="highlights">Highlights</h2>
+            <div class="panel">
+                <ol>
+                    <li>Designed a complex multi-module system: clear boundaries, consistent contracts, predictable
+                        deployments.</li>
+                    <li>Helped teams reduce “production mysteries” with logs/metrics and boring-but-strong operational
+                        practices.</li>
+                    <li>Enjoy building internal tools that save time and prevent human error.</li>
+                </ol>
+
+                <p class="small">
+                    External links to some of my projects:
+                    <a href="https://uni.sudohub.dev/algo" target="_blank" title="sudohub labs">Creative lab works from
+                        the 1st grade</a>
+                    <a href="https://schedule.sudohub.dev/" target="_blank" title="sudohub labs">University Schedule</a>
+                    <a href="https://arduinka55055.github.io/" target="_blank" title="macOS info">A school
+                        presentation</a>
+                </p>
+
+                <p><a href="#menu">Return to menu</a></p>
+            </div>
+
+            <h2 id="media">Media</h2>
+            <div class="panel">
+                <p><b>My Team:</b></p>
+                <img src="img/team.jpg" width="100%" alt="My team" style="border:4px groove #999;" />
+                <p>The biggest team project: <b>Darkness Survival</b></p>
+                <video width="920" controls style="border:3px solid #777;">
+                    <source src="video/demo.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+
+                <p class="small muted">
+                <p>
+                    YouTube video from a company, jsut to showcase the &lt;iframe&gt; tag in action
+                </p>
+                <iframe title="YouTube Embed" src="https://www.youtube.com/embed/lw1ZKOO1loI?ecver=2" width="640px"
+                    height="360px" allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+                </p>
+
+                <p><a href="#menu">Return to menu</a></p>
+            </div>
+
+            <h2 id="links">Where to go next</h2>
+            <div class="panel">
+                <p>
+                    <a href="projects.html">Projects</a> •
+                    <a href="roadmap.html">Roadmap & Plans</a> •
+                    <a href="creative.html">Creative Stuff</a> •
+                    <a href="lab1.html">Lab Tables (Browsers/Editors)</a> •
+                    <a href="contact.html">Contact</a>
+                </p>
+
+                <p class="small muted">
+                    <a href="https://github.com/sudohubdev" target="_blank">GitHub</a>,
+                    <a href="https://sudohub.dev/" target="_blank">Personal Website</a>
+                    <a href="mailto:admin@sudohub.dev" target="_blank">admin@sudohub.dev</a>
+                </p>
+
+                <p><a href="#top">Back to top</a></p>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span>&copy;<span id="year"></span> Denys — Hosted on <code>https://uni2.sudohub.dev/4.2web/</code></span>
+            <br />
+            <span class="small muted">
+                This site intentionally uses some retro patterns to satisfy a lab vibe (multiple pages, anchors, links,
+                meta, base).
+            </span>
+        </footer>
+
+    </div>
+
+    <script src="https://uni2.sudohub.dev/4.2web/js/main.js"></script>
+</body>
+
+</html>

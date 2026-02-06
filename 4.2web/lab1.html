@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Denys" />
+    <meta name="description" content="Lab tables: browsers and HTML editors comparison." />
+    <base href="https://uni2.sudohub.dev/4.2web/" />
+    <title>Lab Tables — Browsers & Editors</title>
+    <link rel="stylesheet" href="https://uni2.sudohub.dev/4.2web/css/styles.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Lab Tables — Browsers & HTML Editors</h1>
+            <p class="muted">
+                <a href="index.html">Home</a> | <a href="ua/lab1.html">UA</a>
+            </p>
+        </div>
+
+        <div class="content">
+            <div class="panel">
+                <p>
+                    I hate Microsoft Word, so it's a great opportunity to do a comparison chart using HTML. After all
+                    HTML documents are a thing.
+                </p>
+            </div>
+
+            <h2 id="browsers">Browser comparison</h2>
+            <div class="panel">
+                <table border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption style="caption-side: top; padding: 6px; font-weight: bold;">
+                        Browser comparison
+                        <span class="small muted">— symbols: ✓ good / ~ limited / ✗ not supported</span>
+                    </caption>
+
+                    <thead>
+                        <tr bgcolor="#222">
+                            <th scope="col">Criteria</th>
+                            <th scope="col"><a href="lab1.html#chrome" id="chrome" title="Jump link for Chrome column">Chrome</a>
+                            </th>
+                            <th scope="col"><a href="lab1.html#firefox" id="firefox"
+                                    title="Jump link for Firefox column">Firefox</a></th>
+                            <th scope="col"><a href="lab1.html#edge" id="edge" title="Jump link for Edge column">Edge</a></th>
+                            <th scope="col"><a href="lab1.html#safari" id="safari" title="Jump link for Safari column">Safari</a>
+                            </th>
+                            <th scope="col"><a href="lab1.html#opera" id="opera" title="Jump link for Opera column">Opera</a>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row" align="left">Built-in DevTools</th>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Extension ecosystem</th>
+                            <td>Huge</td>
+                            <td>Huge</td>
+                            <td>Huge</td>
+                            <td>~ Limited</td>
+                            <td>Large</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Open-source core</th>
+                            <td>~ Chromium (open) + Google parts</td>
+                            <td>✓ Mostly open</td>
+                            <td>~ Chromium (open) + Microsoft parts</td>
+                            <td>~ WebKit (open) + Apple parts</td>
+                            <td>~ Chromium (open) + Opera parts</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">OS support</th>
+                            <td>Win / macOS / Linux</td>
+                            <td>Win / macOS / Linux</td>
+                            <td>Win / macOS</td>
+                            <td>macOS / iOS</td>
+                            <td>Win / macOS / Linux</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Privacy controls</th>
+                            <td>~ Good (depends on settings)</td>
+                            <td>✓ Strong (good defaults)</td>
+                            <td>~ Good (depends on settings)</td>
+                            <td>✓ Strong (Apple-focused)</td>
+                            <td>~ Good</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Standards compatibility</th>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">~ (Safari quirks happen)</td>
+                            <td align="center">✓</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Best use case</th>
+                            <td>Web apps + extensions</td>
+                            <td>Dev + privacy</td>
+                            <td>Windows integration</td>
+                            <td>macOS/iOS ecosystem</td>
+                            <td>Feature bundle</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <h2 id="editors">HTML editor comparison</h2>
+            <div class="panel">
+                <table border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption style="caption-side: top; padding: 6px; font-weight: bold;">
+                        HTML editor comparison
+                        <span class="small muted">— i like VS Code btw</span>
+                    </caption>
+
+                    <thead>
+                        <tr bgcolor="#222">
+                            <th scope="col">Criteria</th>
+                            <th scope="col"><a href="lab1.html#vscode" id="vscode">VS Code</a></th>
+                            <th scope="col"><a href="lab1.html#atom" id="atom">Atom</a></th>
+                            <th scope="col"><a href="lab1.html#sublime" id="sublime">Sublime</a></th>
+                            <th scope="col"><a href="lab1.html#brackets" id="brackets">Brackets</a></th>
+                            <th scope="col"><a href="lab1.html#npp" id="npp">Notepad++</a></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row" align="left">Extensions / plugins</th>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                            <td align="center">✓</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">HTML/CSS/JS experience</th>
+                            <td>✓ Excellent (IntelliSense + tooling)</td>
+                            <td>~ Good (legacy)</td>
+                            <td>✓ Fast + solid</td>
+                            <td>✓ Web-oriented</td>
+                            <td>~ Basic but usable</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Performance</th>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Very high</td>
+                            <td>Medium</td>
+                            <td>High</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Cross-platform</th>
+                            <td>Win / macOS / Linux</td>
+                            <td>Win / macOS / Linux</td>
+                            <td>Win / macOS / Linux</td>
+                            <td>Win / macOS / Linux</td>
+                            <td>Windows only</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Built-in Git support</th>
+                            <td align="center">✓</td>
+                            <td align="center">~ (via packages)</td>
+                            <td align="center">~ (plugins)</td>
+                            <td align="center">~ (plugins)</td>
+                            <td align="center">~ (plugins)</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" align="left">Best use case</th>
+                            <td>Your daily driver</td>
+                            <td>Nostalgia</td>
+                            <td>Fast editing</td>
+                            <td>Simple web work</td>
+                            <td>Quick edits</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <p class="small muted">
+                Back to: <a href="index.html#links">Index links section</a>
+            </p>
+        </div>
+
+        <div class="footer">
+            <a href="index.html">Home</a> | <a href="projects.html">Projects</a> | <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <script src="https://uni2.sudohub.dev/4.2web/js/main.js"></script>
+</body>
+
+</html>

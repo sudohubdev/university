@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uk" title="Денис - Портфоліо (лаба)">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Вітязь Денис" />
+    <meta name="description" content="Сторінінка-лендінг портфоліо — backend/fullstack розробник (лаба)." />
+    <meta name="keywords" content="portfolio, C#, ASP.NET, SQL Server, fullstack, backend, DevOps, Docker" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Social media meta tags-->
+    <meta property="og:title" content="Вітязь Денис лабораторна">
+    <meta property="og:description"
+        content="Лабораторна робота з дисципліни: «WEB технології та WEB дизайн», має функціонал самозахисту">
+    <meta property="og:image" content="https://sudohub.dev/favicon.ico">
+    <meta property="og:url" content="https://uni.sudohub.dev/4.2web/">
+
+    <!-- Important for hosting at the base URL -->
+    <base href="https://uni2.sudohub.dev/4.2web/ua/" />
+
+    <title>Денис - Портфоліо (лаба)</title>
+    <link rel="stylesheet" href="https://uni2.sudohub.dev/4.2web/css/styles.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="header" id="top">
+            <!--бігаючий текст. Він застарілий, але я не втримався щоб його показати :)-->
+            <marquee behavior="alternate" scrollamount="4">
+                <font size="5"><b>Втілюю ваші мрії у код</b></font>
+            </marquee>
+
+            <div class="panel">
+                <!--А раніше таблична верстка була популярна. До речі її досі іноді застосовують, наприклад, у емейлах-->
+                <table class="layout">
+                    <tr>
+                        <td style="width:160px; text-align:center;">
+                            <img src="../img/headshot.png" alt="Моя фотка" width="140"
+                                style="border:4px groove #999;" />
+                        </td>
+                        <td>
+                            <h1 style="margin:0;">Денис — Backend / Fullstack Розробник</h1>
+                            <p class="muted" style="margin-top:6px;">
+                                4 роки профейсійного досвіду • Програмую з 13 • C#, ASP.NET, SQL Server • HTML/CSS/JS
+                                (ванільний + трішки jQuery)
+                            </p>
+
+                            <span class="badge">фанат macOS</span>
+                            <span class="badge">Обожнюю VS Code</span>
+                            <span class="badge">Docker & Linux</span>
+                            <span class="badge">Мережництво / IPv6</span>
+                            <span class="badge">Вбудовані системи + пайка</span>
+
+                            <p>
+                                <b>Гарячі посилання:</b>
+                                <a href="#about" title="Jump to About section">Про мене</a> |
+                                <a href="#skills" title="Jump to Skills section">Навички</a> |
+                                <a href="#highlights" title="Jump to Highlights section">Успіх</a> |
+                                <a href="projects.html" title="Open Projects page">Проєкти</a> |
+                                <a href="roadmap.html" title="Open Roadmap page">Дорожня карта</a> |
+                                <a href="creative.html" title="Open Creative page">Креатив</a> |
+                                <a href="lab1.html" title="Lab-required tables page">Таблички для лаби 1</a> |
+                                <a href="contact.html" title="Open Contact page">Контакти</a> |
+                                <a href="../index.html" title="Українська версія">EN</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="nav" id="menu">
+            <b>Навігація:</b>
+            <a href="#about">#about</a> |
+            <a href="#skills">#skills</a> |
+            <a href="#highlights">#highlights</a> |
+            <a href="#media">#media</a> |
+            <a href="#links">#links</a> |
+            <a href="#top">Back to top</a>
+        </div>
+
+        <div class="content">
+
+            <h2 id="about">Про мене</h2>
+            <div class="panel">
+                <p>
+                    Я професійний backend/fullstack розробник з <b>4 роками</b> професійного досвіду,
+                    програмуючи з <b>13</b> років. Я люблю проєктувати системи, що піддаються читанню, тестуванню та
+                    масштабуванню —
+                    навіть з хаотичними вимогами.
+                </p>
+                <p>
+                    Я найсильніший у <b>C# / ASP.NET</b> та <b>SQL Server</b>, але я втілював у життя рішення
+                    використовуючи
+                    <b>Java</b>, <b>Python</b>, і <b>Dart</b>. Я впевнено почуваюся з Linux середовищами, процесами
+                    DevOps,
+                    розгортанням, що базується на Docker, та складними мережевими сетапами (включно з <b>IPv6</b>).
+                </p>
+                <p class="small muted">
+                    Увага: Дизайн “лаби” є навмисним — проста розмітка, видимі якорі, багатосторінковість, та олдскульні
+                    вайби.
+                </p>
+                <p>
+                    <a href="#menu" title="Return to the navigation block">Повернутися до меню</a>
+                </p>
+            </div>
+
+            <h2 id="skills">Навички</h2>
+            <div class="panel">
+                <ul>
+                    <li><b>Бекенд:</b> C#, ASP.NET, Web APIs, аутентифікація, кешування, фонові процеси</li>
+                    <li><b>Дані:</b> SQL Server (дизайн, швидкодія, індексування), міграції, звіти</li>
+                    <li><b>Веб:</b> HTML/CSS/JS (vanilla), трішки jQuery, основи UX</li>
+                    <li><b>Системи:</b> Linux, Docker, DevOps процеси, мережництво (IPv6), усунення проблем</li>
+                    <li><b>Екстра:</b> Основи вбудованих систем, пайка/возня з "залізом"</li>
+                </ul>
+                <p><a href="#menu">Повернутися до меню</a></p>
+            </div>
+
+            <h2 id="highlights">Успіх</h2>
+            <div class="panel">
+                <ol>
+                    <li>Розробив складну багатомодульну систему: чіткі межі, послідовні контракти, передбачувані
+                        розгортання.</li>
+                    <li>Допомагав командам зменшувати «таємниці на проді» за допомогою журналів/метрик і нудних, але
+                        потужних Практик.</li>
+                    <li>Насолоджуюся створенням вбудованих інструментів, які економлять час і запобігають людським
+                        помилкам.</li>
+                </ol>
+
+                <p class="small">
+                    Зовнішні посилання на деякі з моїх проєктів:
+                    <a href="https://uni.sudohub.dev/algo" target="_blank" title="sudohub labs">Креативні лаби з 1
+                        курсу</a>
+                    <a href="https://schedule.sudohub.dev/" target="_blank" title="sudohub labs">Розклад для універу</a>
+                    <a href="https://arduinka55055.github.io/" target="_blank" title="macOS info">Шкільна
+                        презентація</a>
+                </p>
+
+                <p><a href="#menu">Повернутися до меню</a></p>
+            </div>
+
+            <h2 id="media">Медіа</h2>
+            <div class="panel">
+                <p><b>Моя команда:</b></p>
+                <img src="../img/team.jpg" width="100%" alt="My team" style="border:4px groove #999;" />
+                <p>Найбільший командний проєкт: <b>Darkness Survival</b></p>
+                <video width="920" controls style="border:3px solid #777;">
+                    <source src="../video/demo.mp4" type="video/mp4" />
+                    Ваш браузер не підтримує тег відео.
+                </video>
+
+                <p class="small muted">
+                <p>
+                    YouTube відео з компанії, чисто щоб показати тег &lt;iframe&gt; у дії
+                </p>
+                <iframe title="YouTube Embed" src="https://www.youtube.com/embed/lw1ZKOO1loI?ecver=2" width="640px"
+                    height="360px" allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+                </p>
+
+                <p><a href="#menu">Повернутися до меню</a></p>
+            </div>
+
+            <h2 id="links">Що слід глянути ще</h2>
+            <div class="panel">
+                <p>
+                    <a href="projects.html">Проєкти</a> •
+                    <a href="roadmap.html">Роадмап & Плани</a> •
+                    <a href="creative.html">Керативні штучки</a> •
+                    <a href="lab1.html">Таблиця для лаби (Браузери/Редактори)</a> •
+                    <a href="contact.html">Контакти</a>
+                </p>
+
+                <p class="small muted">
+                    <a href="https://github.com/sudohubdev" target="_blank">GitHub</a>,
+                    <a href="https://sudohub.dev/" target="_blank">Персональний вебсайт</a>
+                    <a href="mailto:admin@sudohub.dev" target="_blank">admin@sudohub.dev</a>
+                </p>
+
+                <p><a href="#top">Нагору</a></p>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span>&copy;<span id="year"></span> Денис — Хост на <code>https://uni2.sudohub.dev/4.2web/</code></span>
+            <br />
+            <span class="small muted">
+                Цей сайт навмисно використовує деякі ретро-патерни, щоб задовольнити атмосферу лаби (багато
+                сторінок, якорі, посилання, meta, base).
+            </span>
+        </footer>
+
+    </div>
+
+    <script src="https://uni2.sudohub.dev/4.2web/js/main.js"></script>
+</body>
+
+</html>
