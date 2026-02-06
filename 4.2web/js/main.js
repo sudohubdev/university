@@ -15,7 +15,7 @@ function stayHere()
 
   // Якщо мова державна (або не дуже)
   let lang = navigator.language.toLowerCase();
-  if(lang.includes("en") || lang.includes("ru")){
+  if(lang.includes("ua") || lang.includes("uk") || lang.includes("ru")){
 
     //Перевірка чи ми уже на укр версії
     if(window.location.href.includes("ua/")) return;
