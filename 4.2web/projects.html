@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="author" content="Denys" />
-    <meta name="description" content="Projects — portfolio (lab edition)." />
+    <meta name="description" content="Projects — portfolio (lab edition). HTML5 multimedia + old-school embed." />
     <base href="https://uni.sudohub.dev/4.2web/" />
     <title>Projects — Denys</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
@@ -19,6 +19,9 @@
                 <a href="projects.html#backend">Backend</a> |
                 <a href="projects.html#fullstack">Fullstack</a> |
                 <a href="projects.html#infra">Infra/DevOps</a> |
+                <a href="projects.html#media">Multimedia (Lab 1.4)</a> |
+                <a href="projects.html#map">Image Map</a> |
+                <a href="projects.html#swf">Flash (SWF)</a> |
                 <a href="ua/projects.html">UA</a>
             </p>
         </div>
@@ -28,15 +31,15 @@
             <div class="panel">
                 <ul>
                     <li>
-                        <b>MvcProxy</b> — scalable ASP.NET Web API than empowers all the sudohub.dev websites
+                        <b>MvcProxy</b> — scalable ASP.NET Web API that empowers all the sudohub.dev websites
                         <br />
                         <a href="https://sudohub.dev/" target="_blank">Server</a> |
                         <a href="roadmap.html#systems">Related roadmap section</a>
                     </li>
                     <li>
-                        <b>RentalPoint</b> — the best solution for AV rental business i work on
+                        <b>RentalPoint</b> — AV rental business solution
                         <br />
-                        <a href="https://rentalpoint3.com/about.html">https://rentalpoint3.com/about.html</a>
+                        <a href="https://rentalpoint3.com/about.html" target="_blank">Promo page</a>
                     </li>
                 </ul>
                 <p><a href="projects.html#top">Back to top</a></p>
@@ -70,6 +73,123 @@
                 </ul>
                 <p><a href="contact.html">Contact me</a> • <a href="index.html#links">Back to links</a></p>
             </div>
+
+            <!-- ======================= LAB 1.4 MULTIMEDIA SECTION ======================= -->
+            <h2 id="media">HTML5 multimedia showcase (Lab 1.4)</h2>
+            <div class="panel">
+                <p class="muted small">
+                    This section demonstrates: <code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code>,
+                    <code>&lt;video&gt;</code>, multiple <code>&lt;source&gt;</code>, and attributes like
+                    <code>controls</code>, <code>preload</code>, <code>loop</code>, <code>muted</code>,
+                    <code>poster</code>,
+                    and <code>mediagroup</code>.
+                </p>
+
+                <h3>Darkness Survival — media pack</h3>
+
+                <p>
+                    <img src="img/darkness-survival.png" alt="Darkness Survival cover art (placeholder)"
+                        title="Darkness Survival — cover art" width="220" height="220"
+                        style="border:4px groove #999; float:left; margin:0 12px 12px 0;" />
+                    <b>Darkness Survival</b> — game project by my friend Dark (SudoHub Team).
+                    <br />
+                    Darkness Survival is a casual survival game with rogue elements. The player controls Nero, a
+                    mercenary stuck in a dark, mysterious looped world where he must survive waves of enemies, becoming
+                    stronger with each dark soul he receives and try to get out of this nightmare.
+                </p>
+                <div style="clear:both;"></div>
+
+                <!-- VIDEO: multiple sources + poster + controls -->
+                <p><b>Gameplay / promo video (multiple sources)</b></p>
+                <video width="920" height="518" controls preload="metadata" poster="img/darkness-survival-thumbnail.jpg"
+                    style="border:3px solid #777;">
+                    <source src="video/darkness-survival.mp4" type="video/mp4" />
+                    <source src="video/darkness-survival.webm" type="video/webm" />
+                    <source src="video/darkness-survival.ogv" type="video/ogg" />
+                    Your browser does not support HTML5 video.
+                </video>
+
+                <!-- AUDIO: multiple sources + loop -->
+                <p><b>Soundtrack / ambience (multiple sources)</b></p>
+                <audio controls preload="none" loop>
+                    <source src="audio/music.mp3" type="audio/mpeg" />
+                    <source src="audio/music.ogg" type="audio/ogg" />
+                    Your browser does not support HTML5 audio.
+                </audio>
+
+                <p><a href="projects.html#top">Back to top</a></p>
+            </div>
+
+            <!-- ======================= IMAGE MAP (CLIENT-SIDE) ======================= -->
+            <h2 id="map">Client-side image map (Lab 1.4)</h2>
+            <div class="panel">
+                <p class="small muted">
+                    One image with multiple clickable hotspots using <code>&lt;map&gt;</code> +
+                    <code>&lt;area&gt;</code>.
+                </p>
+
+                <!-- Put your own site-map-ish picture here -->
+                <img src="img/map.jpg" alt="SudoHub + projects navigation board (placeholder)"
+                    title="Clickable image map demo" width="768" height="512" usemap="#projectmap"
+                    style="border:3px solid #777; width:768px; height:512px;" />
+
+                <!--site https://www.image-map.net/ helped me a lot-->
+                <map name="projectmap">
+                    <area target="_blank" alt="WPF" title="WPF"
+                        href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/" coords="30,110,231,193"
+                        shape="rect">
+
+                    <area target="_blank" alt="ASP.NET Core" title="ASP.NET Core"
+                        href="https://dotnet.microsoft.com/en-us/apps/aspnet" coords="274,106,493,196" shape="rect">
+
+                    <area target="_blank" alt="Unity3D" title="Unity3D" href="https://unity.com/"
+                        coords="533,109,736,196" shape="rect">
+
+                    <area target="_blank" alt=".NET MAUI" title=".NET MAUI"
+                        href="https://dotnet.microsoft.com/en-us/apps/maui" coords="32,254,233,330" shape="rect">
+
+                    <area target="_blank" alt="Azure DevOps" title="Azure DevOps"
+                        href="https://azure.microsoft.com/en-us/products/devops" coords="275,253,494,330" shape="rect">
+
+                    <area target="_blank" alt="SQL Server" title="SQL Server"
+                        href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads" coords="533,254,738,329"
+                        shape="rect">
+                </map>
+                <p class="small muted">
+                    Tip: use some online map generators instead of writing coordinates manually.
+                </p>
+
+                <p><a href="projects.html#top">Back to top</a></p>
+            </div>
+
+            <!-- ======================= SWF (OBJECT + EMBED) ======================= -->
+            <h2 id="swf">Silly SWF (Flash / old-school)</h2>
+            <div class="panel">
+                <p>
+                    This block demonstrates <code>&lt;object&gt;</code> + <code>&lt;param&gt;</code> and a nested
+                    <code>&lt;embed&gt;</code> fallback for legacy content (SWF).
+                </p>
+
+                <object data="flash/sample.swf" type="application/x-shockwave-flash" width="640" height="360">
+                    <param name="movie" value="flash/sample.swf" />
+                    <param name="quality" value="high" />
+                    <param name="wmode" value="opaque" />
+                    <param name="allowFullScreen" value="true" />
+                    <param name="loop" value="true" />
+
+                    <embed src="flash/sample.swf" type="application/x-shockwave-flash" width="640" height="360"
+                        quality="high" pluginspage="https://www.adobe.com/go/getflashplayer">
+                    </embed>
+
+                    <p class="small muted">
+                        Your browser cannot play SWF content. (This is expected on modern browsers.)
+                    </p>
+                </object>
+
+                <p><a href="projects.html#top">Back to top</a></p>
+            </div>
+
+
         </div>
 
         <div class="footer">

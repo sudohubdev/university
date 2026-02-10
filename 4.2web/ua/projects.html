@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="author" content="Денис" />
-    <meta name="description" content="Projects — portfolio (lab edition)." />
+    <meta name="author" content="Denys" />
+    <meta name="description" content="Проєкти — портфоліо (лабораторна версія). HTML5 мультимедіа + олдскульне вбудовування." />
     <base href="https://uni.sudohub.dev/4.2web/ua/" />
-    <title>Проєкти — Денис</title>
+    <title>Проєкти — Denys</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
 </head>
 
@@ -16,9 +16,12 @@
             <h1>Проєкти</h1>
             <p class="muted">
                 <a href="index.html">Домівка</a> |
-                <a href="projects.html#backend">Backend</a> |
-                <a href="projects.html#fullstack">Fullstack</a> |
-                <a href="projects.html#infra">Infra/DevOps</a> |
+                <a href="projects.html#backend">Бекенд</a> |
+                <a href="projects.html#fullstack">Фулстек</a> |
+                <a href="projects.html#infra">Інфра/DevOps</a> |
+                <a href="projects.html#media">Мультимедіа (ЛР 1.4)</a> |
+                <a href="projects.html#map">Карта зображення</a> |
+                <a href="projects.html#swf">Flash (SWF)</a> |
                 <a href="../projects.html">EN</a>
             </p>
         </div>
@@ -28,32 +31,32 @@
             <div class="panel">
                 <ul>
                     <li>
-                        <b>MvcProxy</b> — масштабований ASP.NET Web API який забеспечує роботу усіх sudohub.dev вебсайтів
+                        <b>MvcProxy</b> — масштабований ASP.NET Web API, який забезпечує роботу всіх сайтів sudohub.dev
                         <br />
                         <a href="https://sudohub.dev/" target="_blank">Сервер</a> |
-                        <a href="roadmap.html#systems">Пов'язаний розділ дорожньої карти</a>
+                        <a href="roadmap.html#systems">Пов’язаний розділ дорожньої карти</a>
                     </li>
                     <li>
-                        <b>RentalPoint</b> — найкраще рішення для бізнесу з оренди аудіовізуального обладнання, над яким я працюю
+                        <b>RentalPoint</b> — рішення для бізнесу з прокату AV-обладнання
                         <br />
-                        <a href="https://rentalpoint3.com/about.html">https://rentalpoint3.com/about.html</a>
+                        <a href="https://rentalpoint3.com/about.html" target="_blank">Промо-сторінка</a>
                     </li>
                 </ul>
                 <p><a href="projects.html#top">Нагору</a></p>
             </div>
 
-            <h2 id="fullstack">Fullstack projects</h2>
+            <h2 id="fullstack">Фулстек-проєкти</h2>
             <div class="panel">
                 <table class="layout">
                     <tr>
                         <td style="width:50%;">
-                            <b>Розклад Університету</b><br />
-                            покращення розкладу мого університету.<br />
+                            <b>Розклад університету</b><br />
+                            Покращую розклад свого університету.<br />
                             <a href="https://schedule.sudohub.dev/" target="_blank">Посилання</a>
                         </td>
                         <td>
-                            <b>THREE.JS game, Minecraft клон</b><br />
-                            Я написав цей код у 2020<br />
+                            <b>Гра на THREE.JS, клон Minecraft</b><br />
+                            Я написав цей код у 2020 році<br />
                             <a href="https://github.com/sudohubdev/threejs-minecraft" target="_blank">Посилання</a>
                         </td>
                     </tr>
@@ -61,19 +64,136 @@
                 <p><a href="projects.html#top">Нагору</a></p>
             </div>
 
-            <h2 id="infra">Infra / DevOps</h2>
+            <h2 id="infra">Інфраструктура / DevOps</h2>
             <div class="panel">
                 <ul>
-                    <li><b>Докеризовані розгортання</b> — відтворювані локальні + продакшн-середовища.</li>
-                    <li><b>IPv6 лабораторія</b> — маршрутизація, правила міжмережевого екрану, налагодження підключення.</li>
-                    <li><b>Linux автоматизація</b> — скрипти, сервіси, основи моніторингу.</li>
+                    <li><b>Деплої в Docker</b> — відтворювані локальні та продакшн середовища.</li>
+                    <li><b>IPv6-лаба</b> — маршрутизація, правила фаєрволу, діагностика з’єднання.</li>
+                    <li><b>Автоматизація в Linux</b> — скрипти, сервіси, базовий моніторинг.</li>
                 </ul>
-                <p><a href="contact.html">Контакти</a> • <a href="index.html#links">Повернутися до посилань</a></p>
+                <p><a href="contact.html">Зв’язатися зі мною</a> • <a href="index.html#links">Назад до посилань</a></p>
             </div>
+
+            <!-- ======================= LAB 1.4 MULTIMEDIA SECTION ======================= -->
+            <h2 id="media">Демонстрація мультимедіа HTML5 (ЛР 1.4)</h2>
+            <div class="panel">
+                <p class="muted small">
+                    Цей розділ демонструє: <code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code>,
+                    <code>&lt;video&gt;</code>, декілька <code>&lt;source&gt;</code>, а також атрибути
+                    <code>controls</code>, <code>preload</code>, <code>loop</code>, <code>muted</code>,
+                    <code>poster</code>
+                    та <code>mediagroup</code>.
+                </p>
+
+                <h3>Darkness Survival — медіа-пак</h3>
+
+                <p>
+                    <img src="../img/darkness-survival.png" alt="Обкладинка Darkness Survival (плейсхолдер)"
+                        title="Darkness Survival — обкладинка" width="220" height="220"
+                        style="border:4px groove #999; float:left; margin:0 12px 12px 0;" />
+                    <b>Darkness Survival</b> — ігровий проєкт мого друга Dark (команда SudoHub).
+                    <br />
+                    Darkness Survival — це казуальна survival-гра з rogue-елементами. Гравець керує Неро — найманцем,
+                    який застряг у темному, загадковому зацикленому світі, де він має переживати хвилі ворогів,
+                    стаючи сильнішим із кожною темною душею, яку отримує, і намагатися вибратися з цього кошмару.
+                </p>
+                <div style="clear:both;"></div>
+
+                <!-- VIDEO: multiple sources + poster + controls -->
+                <p><b>Геймплей / промо-відео (декілька джерел)</b></p>
+                <video width="920" height="518" controls preload="metadata" poster="img/darkness-survival-thumbnail.jpg"
+                    style="border:3px solid #777;">
+                    <source src="../video/darkness-survival.mp4" type="video/mp4" />
+                    <source src="../video/darkness-survival.webm" type="video/webm" />
+                    <source src="../video/darkness-survival.ogv" type="video/ogg" />
+                    Ваш браузер не підтримує HTML5 відео.
+                </video>
+
+                <!-- AUDIO: multiple sources + loop -->
+                <p><b>Саундтрек / атмосферний звук (декілька джерел)</b></p>
+                <audio controls preload="none" loop>
+                    <source src="../audio/music.mp3" type="audio/mpeg" />
+                    <source src="../audio/music.ogg" type="audio/ogg" />
+                    Ваш браузер не підтримує HTML5 аудіо.
+                </audio>
+
+                <p><a href="projects.html#top">Нагору</a></p>
+            </div>
+
+            <!-- ======================= IMAGE MAP (CLIENT-SIDE) ======================= -->
+            <h2 id="map">Клієнтська карта зображення (ЛР 1.4)</h2>
+            <div class="panel">
+                <p class="small muted">
+                    Одне зображення з кількома клікабельними областями за допомогою <code>&lt;map&gt;</code> +
+                    <code>&lt;area&gt;</code>.
+                </p>
+
+                <!-- Put your own site-map-ish picture here -->
+                <img src="../img/map.jpg" alt="SudoHub + навігаційна дошка проєктів (плейсхолдер)"
+                    title="Демо клікабельної карти зображення" width="768" height="512" usemap="#projectmap"
+                    style="border:3px solid #777; width:768px; height:512px;" />
+
+                <!--site https://www.image-map.net/ helped me a lot-->
+                <map name="projectmap">
+                    <area target="_blank" alt="WPF" title="WPF"
+                        href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/" coords="30,110,231,193"
+                        shape="rect">
+
+                    <area target="_blank" alt="ASP.NET Core" title="ASP.NET Core"
+                        href="https://dotnet.microsoft.com/en-us/apps/aspnet" coords="274,106,493,196" shape="rect">
+
+                    <area target="_blank" alt="Unity3D" title="Unity3D" href="https://unity.com/"
+                        coords="533,109,736,196" shape="rect">
+
+                    <area target="_blank" alt=".NET MAUI" title=".NET MAUI"
+                        href="https://dotnet.microsoft.com/en-us/apps/maui" coords="32,254,233,330" shape="rect">
+
+                    <area target="_blank" alt="Azure DevOps" title="Azure DevOps"
+                        href="https://azure.microsoft.com/en-us/products/devops" coords="275,253,494,330" shape="rect">
+
+                    <area target="_blank" alt="SQL Server" title="SQL Server"
+                        href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads" coords="533,254,738,329"
+                        shape="rect">
+                </map>
+                <p class="small muted">
+                    Порада: використовуйте онлайн-генератори карт зображень замість того, щоб писати координати вручну.
+                </p>
+
+                <p><a href="projects.html#top">Нагору</a></p>
+            </div>
+
+            <!-- ======================= SWF (OBJECT + EMBED) ======================= -->
+            <h2 id="swf">Дурнуватий SWF (Flash / олдскул)</h2>
+            <div class="panel">
+                <p>
+                    Цей блок демонструє <code>&lt;object&gt;</code> + <code>&lt;param&gt;</code> та вкладений
+                    fallback через <code>&lt;embed&gt;</code> для застарілого контенту (SWF).
+                </p>
+
+                <object data="../flash/sample.swf" type="application/x-shockwave-flash" width="640" height="360">
+                    <param name="movie" value="flash/sample.swf" />
+                    <param name="quality" value="high" />
+                    <param name="wmode" value="opaque" />
+                    <param name="allowFullScreen" value="true" />
+                    <param name="loop" value="true" />
+
+                    <embed src="../flash/sample.swf" type="application/x-shockwave-flash" width="640" height="360"
+                        quality="high" pluginspage="https://www.adobe.com/go/getflashplayer">
+                    </embed>
+
+                    <p class="small muted">
+                        Ваш браузер не може відтворити SWF-контент. (Це очікувано в сучасних браузерах.)
+                    </p>
+                </object>
+
+                <p><a href="projects.html#top">Нагору</a></p>
+            </div>
+
+
         </div>
 
         <div class="footer">
-            <a href="index.html">Домівка</a> | <a href="roadmap.html">Дорожня карта</a> | <a href="creative.html">Креатив</a>
+            <a href="index.html">Головна</a> | <a href="roadmap.html">Дорожня карта</a> | <a href="creative.html">Творче</a>
         </div>
     </div>
 
