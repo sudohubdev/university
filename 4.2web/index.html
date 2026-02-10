@@ -21,6 +21,23 @@
 
     <title>Denys — Portfolio (Lab Edition)</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
+
+    <style>
+        /* marquee rainbow animation keyframes */
+        @keyframes rainbow {
+            0% { color: red; }
+            16% { color: orange; }
+            33% { color: yellow; }
+            50% { color: green; }
+            66% { color: blue; }
+            83% { color: indigo; }
+            100% { color: violet; }
+        }
+        /* Apply the rainbow animation to the marquee text */
+        marquee font {
+            animation: rainbow 5s linear infinite;
+        }
+    </style>
 </head>
 
 <body>
@@ -155,6 +172,7 @@
                 <p>
                     YouTube video from a company, jsut to showcase the &lt;iframe&gt; tag in action
                 </p>
+                <span class="badge">RentalPoint Software</span><br/>
                 <iframe title="YouTube Embed" src="https://www.youtube.com/embed/lw1ZKOO1loI?ecver=2" width="640px"
                     height="360px" allow="autoplay; encrypted-media" allowfullscreen>
                 </iframe>
@@ -165,6 +183,7 @@
 
             <h2 id="links">Where to go next</h2>
             <div class="panel">
+                <p>Cool Links</p>
                 <p>
                     <a href="projects.html">Projects</a> •
                     <a href="roadmap.html">Roadmap & Plans</a> •

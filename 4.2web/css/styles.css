@@ -1,77 +1,155 @@
-/* Intentionally "old-school lab vibe" + simple */
+@import "https://uni.sudohub.dev/4.2web/css/lab1.css";
+
+/* =========================
+   LAB 1.2 ADD-ON (CSS)
+   selectors: > + [] :pseudo ::pseudo, flex/filter, cascade conflicts
+   ========================= */
+
+/* --- A) Modern-ish background effect (but still lab-friendly) --- */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: "Tahoma", "Verdana", Arial, sans-serif;
-  background: #0e0e0e url("../assets/img/bg-placeholder.jpg") fixed;
-  color: #eaeaea;
+  /* conflict demo: body background is already set above; this will override if placed later */
+  background-image: radial-gradient(circle at 20% 10%, rgba(124,255,178,0.12), transparent 40%),
+                    radial-gradient(circle at 80% 20%, rgba(179,139,255,0.12), transparent 45%);
 }
 
-a { color: #7CFFB2; }
-a:visited { color: #b38bff; }
-a:hover { color: #ffd36e; }
+/* --- B) Context selectors: child (>) + sibling (+) --- */
 
-.wrapper {
-  width: 980px;           /* fixed width = classic old design */
-  margin: 0 auto;
-  border: 6px ridge #777; /* loud border */
-  background: rgba(0,0,0,0.75);
+/* Only direct badges inside a panel (not nested deeper) */
+.panel > .badge {
+  border-style: dashed;
 }
 
-.header {
-  padding: 14px;
-  border-bottom: 3px double #999;
+/* Style the first paragraph directly after each H2 */
+h2 + .panel > p:first-child {
+  font-style: italic;
+  text-indent: 18px;
 }
 
+/* Make the first letter of the first paragraph after H2 look "report-like" */
+h2 + .panel > p:first-child::first-letter {
+  font-size: 220%;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* --- C) Attribute selectors --- */
+
+/* Mark external links */
+a[target="_blank"]::after {
+  content: " ↗";
+  font-size: 90%;
+  opacity: 0.8;
+}
+
+/* Highlight any link that has a title attribute (anchors have titles) */
+a[title] {
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+/* --- D) Pseudo-classes: focus/hover/active --- */
+a:hover {
+  filter: brightness(1.1);
+}
+
+a:active {
+  filter: contrast(1.2);
+}
+
+/* Keyboard accessibility */
+a:focus-visible {
+  outline: 2px solid rgba(124,255,178,0.8);
+  outline-offset: 2px;
+}
+
+/* Selection pseudo-element */
+::selection {
+  background: rgba(255, 211, 110, 0.35);
+}
+
+/* --- E) Flex layout --- */
+/* Turn the navigation into a flex row that wraps nicely */
 .nav {
-  padding: 10px 14px;
-  border-bottom: 2px dotted #666;
-  background: rgba(255,255,255,0.06);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.badge {
+/* Make the first text in nav (the <b> Navigation) behave as a block item */
+.nav > b {
   display: inline-block;
-  padding: 2px 8px;
-  border: 1px solid #999;
-  background: rgba(255,255,255,0.08);
+  margin-right: 8px;
+}
+
+/* --- F) Media: show box-model skills + filter --- */
+#media+.panel > img {
+  border: dashed 2px #999 !important;
+}
+
+/* Video box model + hover effect */
+#media+.panel video {
+  display: block;
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 10px; /* mentioned in lab links too */
+}
+
+#media+.panel video:hover {
+  filter: brightness(1.05);
+}
+
+/* --- G) List styling --- */
+.panel > ul > li {
+  margin: 6px 0;
+}
+
+.panel > ol > li:nth-child(odd) {
+  /* nth-child pseudo requirement */
+  background: rgba(255,255,255,0.04);
+}
+
+/* --- H) A neat "section label" using ::before --- */
+h2[id]::before {
+  content: "#";
+  opacity: 0.4;
   margin-right: 6px;
-  font-size: 12px;
 }
 
-.content {
-  padding: 14px;
-}
-
-.footer {
-  padding: 10px 14px;
-  border-top: 2px dashed #666;
-  font-size: 12px;
-  color: #cfcfcf;
-}
-
+/* --- I) Backdrop blur (modern) with fallback --- */
 .panel {
-  border: 2px inset #999;
-  padding: 10px;
-  margin: 10px 0;
-  background: rgba(255,255,255,0.05);
+  /* If supported: glass-ish effect */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
-.small { font-size: 12px; }
-.muted { color: #c8c8c8; }
-
-hr {
-  border: 0;
-  border-top: 2px dotted #666;
-  margin: 16px 0;
+/* --- J) Cascade conflict demo --- */
+/* 1) General rule */
+.panel p {
+  color: #d8d8d8;
 }
 
-table.layout {
-  width: 100%;
-  border-collapse: collapse;
+/* 2) More specific rule (wins due to specificity) */
+#highlights+.panel p {
+  color: #ffffff;
 }
 
-table.layout td {
-  vertical-align: top;
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 10px;
+/* 3) Force override with !important (wins even vs specificity) */
+#highlights+.panel p.small {
+  color: #ffd36e !important; /* demonstrate important override */
+}
+
+/* --- K) Modern selector grouping with :is() --- */
+:is(h1, h2) {
+  letter-spacing: 0.3px;
+}
+
+/* --- L) Responsive-ish styling --- */
+.wrapper {
+  width: min(980px, calc(100% - 16px));
+}
+
+h1 {
+  font-size: clamp(20px, 2.4vw, 32px);
 }
