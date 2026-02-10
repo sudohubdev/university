@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 
 <head>
     <meta charset="UTF-8" />
@@ -7,63 +7,300 @@
     <base href="https://uni.sudohub.dev/4.2web/ua/" />
     <title>Креатив — Денис</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
+    <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/lab3.css" />
 </head>
 
 <body>
     <div class="wrapper">
         <div class="header" id="top">
             <h1>Креативні штучки</h1>
-            <p class="muted">
-                <a href="index.html">Домівка</a> |
-                <a href="creative.html#ideas">Ідеї</a> |
-                <a href="creative.html#notes">Нотатки</a> |
-                <a href="creative.html#links">Посилання</a> |
-                <a href="../creative.html">EN</a>
-            </p>
+
+            <!-- Lab 1.3: горизонтальне меню на основі UL + CSS (олдскул) -->
+            <ul class="labnav">
+                <li><a href="index.html">Домівка</a></li>
+                <li><a href="creative.html#ideas">Ідеї</a></li>
+                <li><a href="creative.html#glossary">Визначення</a></li>
+                <li><a href="creative.html#lists">Демо списків</a></li>
+                <li><a href="creative.html#stack">Демо таблиць</a></li>
+                <li><a href="creative.html#notes">Нотатки</a></li>
+                <li><a href="creative.html#links">Посилання</a></li>
+                <li><a href="../creative.html">EN</a></li>
+            </ul>
         </div>
 
         <div class="content">
+
             <h2 id="ideas">Дошка ідей</h2>
             <div class="panel">
                 <p>
-                    <font size="4"><b>Some things I want to build:</b></font>
+                    <font size="4"><b>Декілька речей, які я хочу зробити:</b></font>
                 </p>
                 <ul>
-                    <li>Маленький «блокнот системного дизайнера» — шаблони, пастки та контрольні списки.</li>
-                    <li>Міні-платформа для демонстрації версій API, кешування, фонових завдань і міграцій.</li>
-                    <li>Прикольна мережева пісочниця: експерименти з IPv6, пояснені на пальцях.</li>
+                    <li>Маленький «нотатник системного дизайнера» — патерни, типові помилки та чеклісти.</li>
+                    <li>Мініплатформа для демо версіонування API, кешування, фонових задач і міграцій.</li>
+                    <li>Грайлива мережева «пісочниця»: експерименти з IPv6, пояснені як історія.</li>
                 </ul>
-                <p><a href="creative.html#top">Нагору</a></p>
+
+                <p class="small muted">
+                    Бонус: меню вище — навігація на базі UL (вимога лабораторної), стилізована через CSS.
+                </p>
+
+                <p><a href="creative.html#top">Назад догори</a></p>
             </div>
 
-            <h2 id="notes">Notes & snippets</h2>
+            <h2 id="glossary">ASP.NET + глосарій сучасного вебу (список визначень)</h2>
+            <div class="panel">
+                <p class="muted small">
+                    Демо списку визначень: <code>&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</code>
+                </p>
+
+                <dl class="glossary">
+                    <dt>ASP.NET Core</dt>
+                    <dt>.NET Web Stack</dt>
+                    <dd>
+                        Сучасний фреймворк для створення вебзастосунків та API на .NET. Найчастіше я використовую його для:
+                        <ul class="nested">
+                            <li>REST API / Minimal API</li>
+                            <li>Автентифікації (JWT/cookies), конвеєрів middleware</li>
+                            <li>Фонової обробки + запланованих задач</li>
+                        </ul>
+                    </dd>
+
+                    <dt>Middleware</dt>
+                    <dd>
+                        Конвеєр компонентів, які обробляють HTTP-запити (логування, auth, кешування, маршрутизація).
+                    </dd>
+
+                    <dt>Dependency Injection (DI)</dt>
+                    <dd>
+                        Спосіб акуратно збирати сервіси (інтерфейси + реалізації) та зберігати код тестованим.
+                    </dd>
+
+                    <dt>Сучасний CSS</dt>
+                    <dd>
+                        Розкладка Flexbox/Grid, логічні властивості, <code>clamp()</code>, <code>filter</code>, переходи (transitions).
+                    </dd>
+
+                    <dt>Сучасний JavaScript</dt>
+                    <dd>
+                        Модулі, <code>fetch</code>, делегування подій, DOM API та “vanilla-first” патерни UI.
+                    </dd>
+                </dl>
+
+                <p><a href="creative.html#top">Назад догори</a></p>
+            </div>
+
+            <h2 id="lists">Демонстрація списків (UL / OL / вкладені / атрибути)</h2>
+            <div class="panel">
+                <p>Є 2 типи списків: нумеровані та маркеровані. Але можна трохи «схитрувати» й використати display:list-item</p>
+                <p><b>1) Маркерований список:</b> тип маркера + маркер-зображення</p>
+
+                <!-- type attribute + CSS list-style-type / list-style-image -->
+                <ul class="bullets-square" type="square">
+                    <li>Квадратні маркери (CSS + type)</li>
+                    <li class="li-outside">list-style-position: outside (майже за замовчуванням)</li>
+                    <li class="li-inside">list-style-position: inside (подивись, як зміщується маркер)</li>
+                </ul>
+
+                <ul class="marker-image">
+                    <li>Ці маркери беруться із зображення (з файлу <code>img/bullet.svg</code>)</li>
+                    <li>Резервний (fallback) маркер все одно заданий у CSS</li>
+                    <li>
+                        Демо вкладеного списку:
+                        <ol class="nested-ol" type="a" start="3">
+                            <li>вкладений ol починається з «c»</li>
+                            <li>і все одно працює всередині ul</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <hr />
+
+                <p><b>2) Нумерований список:</b> <code>type</code>, <code>start</code> та <code>value</code></p>
+
+                <ol class="roman" type="I" start="3">
+                    <li>Start дорівнює 3 ⇒ починається з III</li>
+                    <li value="10">Цей елемент примусово ставить номер X (value="10")</li>
+                    <li>Наступний продовжується: XI</li>
+                    <li>
+                        Вкладені кроки:
+                        <ul class="nested">
+                            <li>проєктування</li>
+                            <li>реалізація</li>
+                            <li>реліз</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <hr />
+
+                <p><b>3) display:list-item для елементів не-LI</b> (лаб-хак)</p>
+
+                <h3 class="as-list">Minimal API</h3>
+                <p class="small muted">Короткі ендпоінти, чиста маршрутизація, чудово для малих сервісів.</p>
+
+                <h3 class="as-list">Логування + метрики</h3>
+                <p class="small muted">Зробіть прод «нудним»: структуровані логи, дашборди, алерти.</p>
+
+                <p><a href="creative.html#top">Назад догори</a></p>
+            </div>
+
+            <h2 id="stack">Таблиця техстека (caption, colgroup, thead/tbody/tfoot, rowspan/colspan)</h2>
+            <div class="panel">
+
+                <table class="tech-table" border="1" cellpadding="6" cellspacing="0" width="100%"
+                    frame="box" rules="all"
+                    summary="Матриця техстека: напрямки, інструменти, використання та примітки. Містить rowspan/colspan і групи колонок.">
+
+                    <caption>Матриця техстека Дениса (демо таблиць ЛР 1.3)</caption>
+
+                    <!-- colgroup / col demo -->
+                    <colgroup>
+                        <col class="col-area" />
+                        <col class="col-tech" />
+                        <col class="col-usage" />
+                        <col class="col-notes" />
+                    </colgroup>
+
+                    <thead>
+                        <tr>
+                            <th colspan="2">Технології</th>
+                            <th colspan="2">Практика</th>
+                        </tr>
+                        <tr>
+                            <th align="left">Напрям</th>
+                            <th align="left">Інструмент / Фреймворк</th>
+                            <th align="left">Для чого використовую</th>
+                            <th align="left">Нотатки</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th rowspan="3" valign="top" align="left">Backend</th>
+                            <td>C# / ASP.NET Core</td>
+                            <td>API, auth, middleware, фонові задачі</td>
+                            <td>Чиста архітектура, профайлінг, спостережуваність</td>
+                        </tr>
+                        <tr>
+                            <td>EF Core / Dapper</td>
+                            <td>ORM + швидкий доступ до даних</td>
+                            <td>Вибір під задачу: зручність vs швидкість</td>
+                        </tr>
+                        <tr>
+                            <td>REST + версіонування</td>
+                            <td>Контрактні API</td>
+                            <td>Стабільність + сумісність</td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">Data</th>
+                            <td>SQL Server</td>
+                            <td>Дизайн схеми, індекси, продуктивність</td>
+                            <td>Тюнінг запитів, міграції, звітність</td>
+                        </tr>
+                        <tr>
+                            <td>Redis (опційно)</td>
+                            <td>Кешування / rate limiting</td>
+                            <td class="empty"> </td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">DevOps</th>
+                            <td>Docker</td>
+                            <td>Контейнери, відтворювані деплої</td>
+                            <td>Compose для локальних стеків</td>
+                        </tr>
+                        <tr>
+                            <td>Linux</td>
+                            <td>Хостинг, автоматизація, дебаг</td>
+                            <td>Мережеві утиліти + логи + скрипти</td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">Web</th>
+                            <td>HTML/CSS/JS</td>
+                            <td>Vanilla UI + DOM</td>
+                            <td>Flex, фільтри, доступний фокус</td>
+                        </tr>
+                        <tr>
+                            <td>jQuery (трохи)</td>
+                            <td>Швидкі рішення для legacy</td>
+                            <td>Тільки коли є сенс</td>
+                        </tr>
+
+                        <!-- colspan demo row -->
+                        <tr>
+                            <th align="left">Особисте</th>
+                            <td colspan="3">
+                                macOS + VS Code, і мені подобається будувати «нудно-надійні» системи.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="small muted">
+                                Використані можливості таблиці: caption, colgroup/col, thead/tbody/tfoot, rowspan/colspan, а також CSS
+                                для caption-side / border-collapse / border-spacing / empty-cells.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <hr />
+
+                <p><b>Міні-демо:</b> border-collapse vs border-spacing</p>
+
+                <table class="demo-collapse" border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption>Злиті межі (border-collapse: collapse)</caption>
+                    <tr><th>Режим</th><th>Вигляд</th></tr>
+                    <tr><td>collapse</td><td>одинарні тонкі межі</td></tr>
+                </table>
+
+                <br />
+
+                <table class="demo-separate" border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption>Окремі межі (border-collapse: separate + border-spacing)</caption>
+                    <tr><th>Режим</th><th>Вигляд</th></tr>
+                    <tr><td>separate</td><td>видимі проміжки між комірками</td></tr>
+                </table>
+
+                <p><a href="creative.html#top">Назад догори</a></p>
+            </div>
+
+            <h2 id="notes">Нотатки та фрагменти</h2>
             <div class="panel">
                 <pre>
-/*Ось так треба центрувати DIVи!*/
+/*Раз і назавжди — ось так центрують DIV-и!*/
 .parent {
   display: flex;
-  justify-content: center; /* Horizontal */
-  align-items: center;     /* Vertical */
-  height: 100vh;           /* Full viewport height */
+  justify-content: center; /* Горизонтально */
+  align-items: center;     /* Вертикально */
+  height: 100vh;           /* Висота на весь viewport */
 }
+
+/* Маленька нотатка про ASP.NET Core */
+app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
         </pre>
-                <p><a href="creative.html#top">Нагору</a></p>
+                <p><a href="creative.html#top">Назад догори</a></p>
             </div>
 
             <h2 id="links">Довільні посилання</h2>
             <div class="panel">
                 <ul>
-                    <li><a href="https://learn.microsoft.com/en-us/dotnet/" target="_blank">.NET документація</a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/dotnet/" target="_blank">Документація .NET</a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/aspnet/core/" target="_blank">Документація ASP.NET Core</a></li>
+                    <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a></li>
                     <li><a href="https://www.docker.com/" target="_blank">Docker</a></li>
-                    <li><a href="https://www.kernel.org/" target="_blank">Linux ядро</a></li>
+                    <li><a href="https://www.kernel.org/" target="_blank">Ядро Linux</a></li>
                 </ul>
-                <p><a href="creative.html#top">Нагору</a></p>
+                <p><a href="creative.html#top">Назад догори</a></p>
             </div>
         </div>
 
         <div class="footer">
-            <a href="projects.html">Проєкти</a> | <a href="roadmap.html">Роадмап</a> | <a
-                href="contact.html">Контакти</a>
+            <a href="projects.html">Проєкти</a> | <a href="roadmap.html">Дорожня карта</a> | <a href="contact.html">Контакти</a>
         </div>
     </div>
 </body>

@@ -7,22 +7,29 @@
     <base href="https://uni.sudohub.dev/4.2web/" />
     <title>Creative — Denys</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
+    <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/lab3.css" />
 </head>
 
 <body>
     <div class="wrapper">
         <div class="header" id="top">
             <h1>Creative Stuff</h1>
-            <p class="muted">
-                <a href="index.html">Home</a> |
-                <a href="creative.html#ideas">Ideas</a> |
-                <a href="creative.html#notes">Notes</a> |
-                <a href="creative.html#links">Links</a> |
-                <a href="ua/creative.html">UA</a>
-            </p>
+
+            <!-- Lab 1.3: horizontal menu based on UL + CSS (old-school) -->
+            <ul class="labnav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="creative.html#ideas">Ideas</a></li>
+                <li><a href="creative.html#glossary">Definitions</a></li>
+                <li><a href="creative.html#lists">Lists demo</a></li>
+                <li><a href="creative.html#stack">Table demo</a></li>
+                <li><a href="creative.html#notes">Notes</a></li>
+                <li><a href="creative.html#links">Links</a></li>
+                <li><a href="ua/creative.html">UA</a></li>
+            </ul>
         </div>
 
         <div class="content">
+
             <h2 id="ideas">Idea board</h2>
             <div class="panel">
                 <p>
@@ -33,6 +40,232 @@
                     <li>A mini platform to demo API versioning, caching, background tasks, and migrations.</li>
                     <li>A playful networking sandbox: IPv6 experiments explained like a story.</li>
                 </ul>
+
+                <p class="small muted">
+                    Bonus: the menu above is a UL-based navigation (lab requirement), styled via CSS.
+                </p>
+
+                <p><a href="creative.html#top">Back to top</a></p>
+            </div>
+
+            <h2 id="glossary">ASP.NET + modern web glossary (definition list)</h2>
+            <div class="panel">
+                <p class="muted small">
+                    Definition list demo: <code>&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</code>
+                </p>
+
+                <dl class="glossary">
+                    <dt>ASP.NET Core</dt>
+                    <dt>.NET Web Stack</dt>
+                    <dd>
+                        A modern framework for building web apps and APIs on .NET. I mostly use it for:
+                        <ul class="nested">
+                            <li>REST APIs / Minimal APIs</li>
+                            <li>Auth (JWT/cookies), middleware pipelines</li>
+                            <li>Background processing + scheduled tasks</li>
+                        </ul>
+                    </dd>
+
+                    <dt>Middleware</dt>
+                    <dd>
+                        A pipeline of components that process HTTP requests (logging, auth, caching, routing).
+                    </dd>
+
+                    <dt>Dependency Injection (DI)</dt>
+                    <dd>
+                        A way to assemble services cleanly (interfaces + implementations) and keep code testable.
+                    </dd>
+
+                    <dt>Modern CSS</dt>
+                    <dd>
+                        Flexbox/Grid layout, logical properties, <code>clamp()</code>, <code>filter</code>, transitions.
+                    </dd>
+
+                    <dt>Modern JavaScript</dt>
+                    <dd>
+                        Modules, <code>fetch</code>, event delegation, DOM APIs, and “vanilla-first” UI patterns.
+                    </dd>
+                </dl>
+
+                <p><a href="creative.html#top">Back to top</a></p>
+            </div>
+
+            <h2 id="lists">Lists showcase (UL / OL / nested / attributes)</h2>
+            <div class="panel">
+                <p>There are 2 types of lists: ordered and unordereed. But you can also cheat a little bit and use display:list-item</p>
+                <p><b>1) Unordered list:</b> marker type + marker image</p>
+
+                <!-- type attribute + CSS list-style-type / list-style-image -->
+                <ul class="bullets-square" type="square">
+                    <li>Square bullets (CSS + type)</li>
+                    <li class="li-outside">list-style-position: outside (default-ish)</li>
+                    <li class="li-inside">list-style-position: inside (see how marker moves)</li>
+                </ul>
+
+                <ul class="marker-image">
+                    <li>These markers come from an image (from a file at <code>img/bullet.svg</code>)</li>
+                    <li>Fallback marker is still defined in CSS</li>
+                    <li>
+                        Nested list demo:
+                        <ol class="nested-ol" type="a" start="3">
+                            <li>nested ol starts at “c”</li>
+                            <li>still works inside ul</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <hr />
+
+                <p><b>2) Ordered list:</b> <code>type</code>, <code>start</code>, and <code>value</code></p>
+
+                <ol class="roman" type="I" start="3">
+                    <li>Start is 3 ⇒ begins at III</li>
+                    <li value="10">This item forces the number to X (value="10")</li>
+                    <li>Next one continues: XI</li>
+                    <li>
+                        Nested steps:
+                        <ul class="nested">
+                            <li>design</li>
+                            <li>implement</li>
+                            <li>ship</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <hr />
+
+                <p><b>3) display:list-item on non-LI elements</b> (lab trick)</p>
+
+                <h3 class="as-list">Minimal API</h3>
+                <p class="small muted">Short endpoints, clean routing, great for small services.</p>
+
+                <h3 class="as-list">Logging + metrics</h3>
+                <p class="small muted">Make production boring: structured logs, dashboards, alerts.</p>
+
+                <p><a href="creative.html#top">Back to top</a></p>
+            </div>
+
+            <h2 id="stack">Tech stack table (caption, colgroup, thead/tbody/tfoot, rowspan/colspan)</h2>
+            <div class="panel">
+
+                <table class="tech-table" border="1" cellpadding="6" cellspacing="0" width="100%"
+                    frame="box" rules="all"
+                    summary="Tech stack matrix: areas, tools, usage, and notes. Includes rowspan/colspan and column groups.">
+
+                    <caption>Denys Tech Stack Matrix (Lab 1.3 tables demo)</caption>
+
+                    <!-- colgroup / col demo -->
+                    <colgroup>
+                        <col class="col-area" />
+                        <col class="col-tech" />
+                        <col class="col-usage" />
+                        <col class="col-notes" />
+                    </colgroup>
+
+                    <thead>
+                        <tr>
+                            <th colspan="2">Technology</th>
+                            <th colspan="2">Practice</th>
+                        </tr>
+                        <tr>
+                            <th align="left">Area</th>
+                            <th align="left">Tool / Framework</th>
+                            <th align="left">Used for</th>
+                            <th align="left">Notes</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th rowspan="3" valign="top" align="left">Backend</th>
+                            <td>C# / ASP.NET Core</td>
+                            <td>APIs, auth, middleware, background jobs</td>
+                            <td>Clean architecture, profiling, observability</td>
+                        </tr>
+                        <tr>
+                            <td>EF Core / Dapper</td>
+                            <td>ORM + fast data access</td>
+                            <td>Pick by case: convenience vs raw speed</td>
+                        </tr>
+                        <tr>
+                            <td>REST + versioning</td>
+                            <td>Contract-first APIs</td>
+                            <td>Stability + compatibility</td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">Data</th>
+                            <td>SQL Server</td>
+                            <td>Schema design, indexes, performance</td>
+                            <td>Query tuning, migrations, reporting</td>
+                        </tr>
+                        <tr>
+                            <td>Redis (optional)</td>
+                            <td>Caching / rate limiting</td>
+                            <td class="empty"> </td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">DevOps</th>
+                            <td>Docker</td>
+                            <td>Containers, reproducible deployments</td>
+                            <td>Compose for local stacks</td>
+                        </tr>
+                        <tr>
+                            <td>Linux</td>
+                            <td>Hosting, automation, debugging</td>
+                            <td>Networking tools + logs + scripts</td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2" valign="top" align="left">Web</th>
+                            <td>HTML/CSS/JS</td>
+                            <td>Vanilla UI + DOM</td>
+                            <td>Flex, filters, accessible focus</td>
+                        </tr>
+                        <tr>
+                            <td>jQuery (a bit)</td>
+                            <td>Legacy quick wins</td>
+                            <td>Only when it makes sense</td>
+                        </tr>
+
+                        <!-- colspan demo row -->
+                        <tr>
+                            <th align="left">Personal</th>
+                            <td colspan="3">
+                                macOS + VS Code, and I like building “boring reliable” systems.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="small muted">
+                                Table features used: caption, colgroup/col, thead/tbody/tfoot, rowspan/colspan, plus CSS
+                                for caption-side / border-collapse / border-spacing / empty-cells.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <hr />
+
+                <p><b>Mini demo:</b> border-collapse vs border-spacing</p>
+
+                <table class="demo-collapse" border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption>Collapsed borders (border-collapse: collapse)</caption>
+                    <tr><th>Mode</th><th>Look</th></tr>
+                    <tr><td>collapse</td><td>single thin borders</td></tr>
+                </table>
+
+                <br />
+
+                <table class="demo-separate" border="1" cellpadding="6" cellspacing="0" width="100%">
+                    <caption>Separate borders (border-collapse: separate + border-spacing)</caption>
+                    <tr><th>Mode</th><th>Look</th></tr>
+                    <tr><td>separate</td><td>visible spacing between cells</td></tr>
+                </table>
+
                 <p><a href="creative.html#top">Back to top</a></p>
             </div>
 
@@ -46,6 +279,9 @@
   align-items: center;     /* Vertical */
   height: 100vh;           /* Full viewport height */
 }
+
+/* ASP.NET Core tiny note */
+app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
         </pre>
                 <p><a href="creative.html#top">Back to top</a></p>
             </div>
@@ -54,6 +290,8 @@
             <div class="panel">
                 <ul>
                     <li><a href="https://learn.microsoft.com/en-us/dotnet/" target="_blank">.NET docs</a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/aspnet/core/" target="_blank">ASP.NET Core docs</a></li>
+                    <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a></li>
                     <li><a href="https://www.docker.com/" target="_blank">Docker</a></li>
                     <li><a href="https://www.kernel.org/" target="_blank">Linux kernel</a></li>
                 </ul>
@@ -62,8 +300,7 @@
         </div>
 
         <div class="footer">
-            <a href="projects.html">Projects</a> | <a href="roadmap.html">Roadmap</a> | <a
-                href="contact.html">Contact</a>
+            <a href="projects.html">Projects</a> | <a href="roadmap.html">Roadmap</a> | <a href="contact.html">Contact</a>
         </div>
     </div>
 </body>
