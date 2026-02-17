@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern CSS Patterns Gallery</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            background-color: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-nav h1 {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .sidebar-nav h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--border);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 4rem;
+            max-width: 1200px;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .example-block {
+            margin-bottom: 5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .example-meta {
+            margin-bottom: 1.5rem;
+        }
+
+        .example-meta h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-meta p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .canvas {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Scoped Overrides for Demo purposes */
+        button {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        input {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #000;
+            color: white;
+        }
+
+        a { color: var(--accent); }
+
+        /* --- SNIPPET STYLES --- */
+
+        /* 1) Center */
+        .ex1-center {
+            min-height: 300px; /* Reduced for demo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+        }
+        .ex1-panel {
+            width: min(520px, 100%);
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+
+        /* 2) Navbar */
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .navlinks { display: flex; gap: 12px; }
+        .actions { margin-left: auto; display: flex; gap: 8px; }
+
+        /* 3) Responsive Navbar */
+        .topbar2 {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 12px 16px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .menuBtn { margin-left: auto; }
+        .navlinks2 { display: flex; gap: 12px; }
+        @media (max-width: 640px) {
+            .navlinks2 {
+                flex-basis: 100%;
+                justify-content: space-between;
+                border-top: 1px solid #333;
+                padding-top: 12px;
+            }
+        }
+
+        /* 4) Toolbar */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .toolGroup { display: flex; gap: 8px; }
+
+        /* 5) Media */
+        .media {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .avatar {
+            width: 48px; height: 48px;
+            border-radius: 999px;
+            flex: 0 0 auto;
+            background: var(--accent); /* placeholder */
+        }
+
+        /* 6) Card Footer */
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            height: 240px;
+            background: var(--surface);
+        }
+        .cardFooter { margin-top: auto; }
+
+        /* 7) Chips */
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+            padding: 6px 10px;
+            border: 1px solid #333;
+            border-radius: 999px;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            background: #111;
+        }
+
+        /* 8) Search */
+        .search { display: flex; gap: 8px; }
+        .search input { flex: 1; min-width: 0; }
+
+        /* 9) Sidebar Layout */
+        .layout { display: flex; min-height: 300px; gap: 12px; }
+        .sidebar { flex: 0 0 140px; border: 1px solid #333; border-radius: 12px; padding: 12px; }
+        .main { flex: 1; min-width: 0; border: 1px solid #333; border-radius: 12px; padding: 12px; }
+
+        /* 10) Sticky Footer */
+        .page-demo {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid #444;
+            padding: 10px;
+        }
+        .hdr, .ftr { padding: 10px; background: #222; border-radius: 8px; }
+        .cnt { flex: 1; padding: 10px; }
+
+        /* 11) Shell */
+        .shell {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 120px 1fr 120px;
+            grid-template-areas: "h h h" "n m a" "f f f";
+        }
+        .h { grid-area: h; background: #222; padding: 10px; }
+        .n { grid-area: n; background: #222; padding: 10px; }
+        .m { grid-area: m; background: #333; padding: 10px; min-height: 100px; }
+        .a { grid-area: a; background: #222; padding: 10px; }
+        .f { grid-area: f; background: #222; padding: 10px; }
+        @media (max-width: 900px) {
+            .shell {
+                grid-template-columns: 1fr;
+                grid-template-areas: "h" "n" "m" "a" "f";
+            }
+        }
+
+        /* 12) Card Grid */
+        .cards {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        .card-item { border: 1px solid #333; border-radius: 12px; padding: 14px; background: var(--surface); }
+
+        /* 13) Featured Card */
+        .cards2 {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .featured { grid-column: 1 / span 2; background: #334155; }
+        @media (max-width: 800px) {
+            .cards2 { grid-template-columns: 1fr; }
+            .featured { grid-column: auto; }
+        }
+
+        /* 14) Form Grid */
+        .formGrid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .formGrid label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; }
+        .full { grid-column: 1 / -1; margin-top: 10px; }
+        @media (max-width: 640px) {
+            .formGrid { grid-template-columns: 1fr; }
+            .full { grid-column: auto; }
+        }
+
+        /* 15) KPIs */
+        .kpis {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+        .kpi { padding: 14px; border: 1px solid #333; border-radius: 12px; background: var(--surface); }
+
+        /* 16) Masonry */
+        .masonry {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-auto-rows: 60px;
+            grid-auto-flow: dense;
+        }
+        .tile { border: 1px solid #333; border-radius: 12px; padding: 12px; background: var(--surface); }
+        .t2 { grid-row: span 2; background: #334155; }
+        .t3 { grid-row: span 3; border-color: var(--accent); }
+
+        /* 17) Fluid */
+        .fluid { padding: clamp(12px, 2vw, 24px); background: #111; border-radius: 12px; }
+        .fluid h2 { font-size: clamp(20px, 3vw, 36px); margin: 0 0 clamp(8px, 1.2vw, 16px); color: var(--accent); }
+
+        /* 18) Container Query */
+        .cq-wrapper { container-type: inline-size; width: 100%; border: 1px dashed #555; padding: 10px; }
+        .cqCard {
+            display: grid;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .cqMedia {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @container (min-width: 520px) {
+            .cqCard { grid-template-columns: 1fr 1.2fr; align-items: center; }
+        }
+
+        @media (max-width: 768px) {
+            body { grid-template-columns: 1fr; }
+            .sidebar-nav { display: none; }
+            main { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar-nav">
+        <h1>Pattern Lab</h1>
+        
+        <h2>Flexbox (1D)</h2>
+        <a href="#ex1">1. Perfect Centering</a>
+        <a href="#ex2">2. Navbar Push-Right</a>
+        <a href="#ex3">3. Responsive Nav</a>
+        <a href="#ex4">4. Toolbar Spacing</a>
+        <a href="#ex5">5. Media Object</a>
+        <a href="#ex6">6. Pinned Footer</a>
+        <a href="#ex7">7. Wrapping Chips</a>
+        <a href="#ex8">8. Search Row</a>
+        <a href="#ex9">9. Sidebar App</a>
+        <a href="#ex10">10. Sticky Footer</a>
+
+        <h2>Grid (2D)</h2>
+        <a href="#ex11">11. Grid Shell</a>
+        <a href="#ex12">12. Auto-Fit Grid</a>
+        <a href="#ex13">13. Featured Spanning</a>
+        <a href="#ex14">14. Responsive Form</a>
+        <a href="#ex15">15. KPI Dashboard</a>
+        <a href="#ex16">16. Masonry Dense</a>
+
+        <h2>Adaptive</h2>
+        <a href="#ex17">17. Fluid Typography</a>
+        <a href="#ex18">18. Container Queries</a>
+    </aside>
+
+    <main>
+        <div class="section-header">
+            <h2>Flexbox Patterns</h2>
+        </div>
+
+        <!-- Example 1 -->
+        <section id="ex1" class="example-block">
+            <div class="example-meta">
+                <h3>1) Perfect centering</h3>
+                <p>Aligns content in both axes. Ideal for modals and loaders.</p>
+            </div>
+            <div class="canvas">
+                <div class="ex1-center">
+                    <div class="ex1-panel">
+                        <h2>Centered</h2>
+                        <p>Works for modals, loaders, empty states.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 2 -->
+        <section id="ex2" class="example-block">
+            <div class="example-meta">
+                <h3>2) Navbar (Push-right)</h3>
+                <p>Uses <code>margin-left: auto</code> to push the actions group to the end.</p>
+            </div>
+            <div class="canvas">
+                <header class="topbar">
+                    <a class="logo" href="#" style="font-weight:bold; text-decoration:none;">Brand</a>
+                    <nav class="navlinks" aria-label="Main">
+                        <a href="#">Docs</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Pricing</a>
+                    </nav>
+                    <div class="actions">
+                        <button style="background:transparent; color:white; border:1px solid #444;">Log in</button>
+                        <button>Sign up</button>
+                    </div>
+                </header>
+            </div>
+        </section>
+
+        <!-- Example 3 -->
+        <section id="ex3" class="example-block">
+            <div class="example-meta">
+                <h3>3) Responsive Navbar (Wrap)</h3>
+                <p>Wraps links to a new line on small viewports.</p>
+            </div>
+            <div class="canvas">
+                <header class="topbar2">
+                    <a class="logo" href="#" style="font-weight:bold; text-decoration:none;">Brand</a>
+                    <button class="menuBtn" aria-label="Menu">☰</button>
+                    <nav class="navlinks2" aria-label="Main">
+                        <a href="#">Docs</a><a href="#">Blog</a><a href="#">Pricing</a>
+                    </nav>
+                </header>
+            </div>
+        </section>
+
+        <!-- Example 4 -->
+        <section id="ex4" class="example-block">
+            <div class="example-meta">
+                <h3>4) Toolbar</h3>
+                <p>Uses <code>justify-content: space-between</code> for distinct tool groups.</p>
+            </div>
+            <div class="canvas">
+                <div class="toolbar">
+                    <div class="toolGroup">
+                        <button>←</button><button>→</button><button>Refresh</button>
+                    </div>
+                    <div class="toolGroup">
+                        <button>Share</button><button>Export</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 5 -->
+        <section id="ex5" class="example-block">
+            <div class="example-meta">
+                <h3>5) Media Object</h3>
+                <p>Classic pattern for avatars and comments. <code>flex: 0 0 auto</code> keeps the image from shrinking.</p>
+            </div>
+            <div class="canvas">
+                <article class="media">
+                    <div class="avatar"></div>
+                    <div class="content">
+                        <h3 style="margin-bottom:4px;">Denys</h3>
+                        <p style="font-size:0.9rem; color:var(--text-dim);">This description handles multiple lines gracefully alongside the fixed-width avatar.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Example 6 -->
+        <section id="ex6" class="example-block">
+            <div class="example-meta">
+                <h3>6) Card with pinned footer</h3>
+                <p><code>margin-top: auto</code> in a column flexbox ensures the footer stays at the bottom regardless of content height.</p>
+            </div>
+            <div class="canvas" style="display:flex; gap:12px;">
+                <article class="card" style="flex:1;">
+                    <h3>Short content</h3>
+                    <p>Brief text.</p>
+                    <div class="cardFooter"><button>Read more</button></div>
+                </article>
+                <article class="card" style="flex:1;">
+                    <h3>Longer content</h3>
+                    <p>This text fills more space, but the button below stays perfectly aligned with its neighbor.</p>
+                    <div class="cardFooter"><button>Read more</button></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Example 7 -->
+        <section id="ex7" class="example-block">
+            <div class="example-meta">
+                <h3>7) Badges / Chips</h3>
+                <p>Uses <code>flex-wrap</code> and <code>gap</code> for organic tag clouds.</p>
+            </div>
+            <div class="canvas">
+                <div class="chips">
+                    <span class="chip">CSS</span>
+                    <span class="chip">Flexbox</span>
+                    <span class="chip">Grid</span>
+                    <span class="chip">Responsive design</span>
+                    <span class="chip">clamp()</span>
+                    <span class="chip">Modern UI</span>
+                    <span class="chip">Tailwind</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 8 -->
+        <section id="ex8" class="example-block">
+            <div class="example-meta">
+                <h3>8) Search row</h3>
+                <p><code>flex: 1</code> makes the input grow. <code>min-width: 0</code> prevents overflow issues.</p>
+            </div>
+            <div class="canvas">
+                <form class="search" role="search">
+                    <input placeholder="Search documentation…" />
+                    <button>Search</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Example 9 -->
+        <section id="ex9" class="example-block">
+            <div class="example-meta">
+                <h3>9) Sidebar Layout</h3>
+                <p>Classic app structure using flexbox for 1D horizontal division.</p>
+            </div>
+            <div class="canvas">
+                <div class="layout">
+                    <aside class="sidebar">Sidebar<br/>Filters<br/>Menu</aside>
+                    <main class="main">
+                        <h2 style="font-size:1.1rem; margin-bottom:8px;">Main content</h2>
+                        <p style="font-size:0.9rem; color:var(--text-dim);">The main area grows to fill the space, while the sidebar remains a fixed width.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 10 -->
+        <section id="ex10" class="example-block">
+            <div class="example-meta">
+                <h3>10) Sticky Footer</h3>
+                <p>Ensures the footer sticks to the bottom of the viewport even when content is short.</p>
+            </div>
+            <div class="canvas">
+                <div class="page-demo">
+                    <header class="hdr">Header</header>
+                    <main class="cnt">Short content area...</main>
+                    <footer class="ftr">Footer sticks to bottom</footer>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h2>Grid Patterns</h2>
+        </div>
+
+        <!-- Example 11 -->
+        <section id="ex11" class="example-block">
+            <div class="example-meta">
+                <h3>11) App shell via areas</h3>
+                <p>Defining layouts with <code>grid-template-areas</code> makes complex macros readable.</p>
+            </div>
+            <div class="canvas">
+                <div class="shell">
+                    <header class="h">Header</header>
+                    <nav class="n">Nav</nav>
+                    <main class="m">Main Content</main>
+                    <aside class="a">Aside</aside>
+                    <footer class="f">Footer</footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 12 -->
+        <section id="ex12" class="example-block">
+            <div class="example-meta">
+                <h3>12) Responsive Card Grid</h3>
+                <p>The "Holy Grail" of responsive layouts: <code>repeat(auto-fit, minmax(size, 1fr))</code>.</p>
+            </div>
+            <div class="canvas">
+                <section class="cards">
+                    <article class="card-item">Card 1</article>
+                    <article class="card-item">Card 2</article>
+                    <article class="card-item">Card 3</article>
+                    <article class="card-item">Card 4</article>
+                </section>
+            </div>
+        </section>
+
+        <!-- Example 13 -->
+        <section id="ex13" class="example-block">
+            <div class="example-meta">
+                <h3>13) Featured Card Spanning</h3>
+                <p>Controlling specific item spans. Great for dashboards.</p>
+            </div>
+            <div class="canvas">
+                <section class="cards2">
+                    <article class="card-item featured">Featured Product (Spans 2)</article>
+                    <article class="card-item">Card 2</article>
+                    <article class="card-item">Card 3</article>
+                    <article class="card-item">Card 4</article>
+                </section>
+            </div>
+        </section>
+
+        <!-- Example 14 -->
+        <section id="ex14" class="example-block">
+            <div class="example-meta">
+                <h3>14) Responsive Form</h3>
+                <p>Switches from 2 columns to 1 column using a simple media query.</p>
+            </div>
+            <div class="canvas">
+                <form class="formGrid">
+                    <label>First name <input /></label>
+                    <label>Last name <input /></label>
+                    <label>Email <input /></label>
+                    <label>Company <input /></label>
+                    <button class="full">Submit Application</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Example 15 -->
+        <section id="ex15" class="example-block">
+            <div class="example-meta">
+                <h3>15) Dashboard KPIs</h3>
+                <p>Consistent card sizing with auto-fitting columns.</p>
+            </div>
+            <div class="canvas">
+                <section class="kpis">
+                    <div class="kpi"><strong>Revenue</strong><br/>$42,000</div>
+                    <div class="kpi"><strong>Users</strong><br/>12,403</div>
+                    <div class="kpi"><strong>Churn</strong><br/>2.4%</div>
+                    <div class="kpi"><strong>NPS</strong><br/>74</div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Example 16 -->
+        <section id="ex16" class="example-block">
+            <div class="example-meta">
+                <h3>16) Masonry-ish (Dense)</h3>
+                <p>Uses <code>grid-auto-flow: dense</code> to fill gaps caused by varying item heights.</p>
+            </div>
+            <div class="canvas">
+                <section class="masonry">
+                    <article class="tile t2">Tall Block</article>
+                    <article class="tile">Normal</article>
+                    <article class="tile t3">Taller Block</article>
+                    <article class="tile">Normal</article>
+                    <article class="tile">Normal</article>
+                    <article class="tile">Normal</article>
+                </section>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h2>Adaptive Extras</h2>
+        </div>
+
+        <!-- Example 17 -->
+        <section id="ex17" class="example-block">
+            <div class="example-meta">
+                <h3>17) Fluid Typography + Spacing</h3>
+                <p>Uses <code>clamp()</code> to interpolate values between a min and max bound based on viewport width.</p>
+            </div>
+            <div class="canvas">
+                <section class="fluid">
+                    <h2>Fluid heading</h2>
+                    <p>Resize the viewport: size grows, but stays within min/max bounds. No media queries needed for the font size!</p>
+                </section>
+            </div>
+        </section>
+
+        <!-- Example 18 -->
+        <section id="ex18" class="example-block">
+            <div class="example-meta">
+                <h3>18) Container Query</h3>
+                <p>Layout reacts to the width of its <strong>parent container</strong> rather than the whole screen.</p>
+            </div>
+            <div class="canvas">
+                <div class="cq-wrapper">
+                    <p style="font-size:0.7rem; color:var(--text-dim); margin-bottom:8px;">The dotted line represents the container boundary.</p>
+                    <article class="cqCard">
+                        <div class="cqMedia"><span>16:9 Aspect Ratio</span></div>
+                        <div>
+                            <h3 style="margin-bottom:8px;">Container-aware card</h3>
+                            <p style="font-size:0.9rem;">This card will split into two columns if this specific dotted box is wider than 520px.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
