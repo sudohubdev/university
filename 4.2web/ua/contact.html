@@ -4,9 +4,186 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="author" content="Denys" />
-    <base href="https://uni.sudohub.dev/4.2web/ua/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="https://uni.sudohub.dev/4.2web/" />
     <title>Контакти — Денис</title>
     <link rel="stylesheet" href="https://uni.sudohub.dev/4.2web/css/styles.css" />
+    <style>
+        :root {
+            --accent-color: #00ffcc;
+            --danger-color: #ff0055;
+            --bg-panel: #1a1a1a;
+            --text-muted: #888;
+            --border-radius: 8px;
+        }
+
+        .lab-section {
+            margin-top: 2rem;
+        }
+
+        .form-container {
+            background: var(--bg-panel);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .danger-title {
+            color: var(--danger-color);
+        }
+
+        /* Search Form Styles */
+        .search-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #444;
+            background: #000;
+            color: #fff;
+        }
+
+        /* 2077 Form Styles */
+        fieldset {
+            border: 1px solid #444;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="number"],
+        input[type="date"],
+        input[type="search"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+        }
+
+        .inline-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .inline-group input {
+            width: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .btn-submit:hover {
+            background: #00cca3;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+        }
+
+        .btn-reset {
+            background: #444;
+            color: #fff;
+        }
+
+        .btn-reset:hover {
+            background: #555;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto;
+            border: 2px solid var(--danger-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            cursor: crosshair;
+            overflow: scroll;
+            max-height: 400px;
+        }
+
+        .map-container img {
+            width: 100%;
+            display: block;
+            filter: grayscale(1) sepia(1) hue-rotate(300deg) brightness(0.8);
+        }
+
+        .map-container:hover img {
+            filter: none;
+        }
+
+        input[type="range"] {
+            cursor: pointer;
+        }
+
+        .small-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,6 +196,7 @@
         </div>
 
         <div class="content">
+            <!-- Існуюча панель контактів -->
             <div class="panel">
                 <p><b>Email:</b> <a href="mailto:admin@sudohub.dev">admin@sudohub.dev</a></p>
                 <p><b>GitHub:</b> <a href="https://github.com/arduinka55055"
@@ -27,6 +205,166 @@
                 <p class="small muted">
                     Скористайся моєю електронною адресою, щоб зв’язатися зі мною.
                 </p>
+            </div>
+
+            <div class="lab-section">
+                <!-- Форма 1: GET (Пошук) -->
+                <div class="form-container">
+                    <h2>Швидкий пошук (Method: GET)</h2>
+                    <form action="https://www.google.com/search" method="get" target="_blank">
+                        <div class="search-group">
+                            <input type="search" name="q" class="search-input" placeholder="Що шукаємо в мережі?" required>
+                            <button type="submit" class="btn btn-submit">Search</button>
+                        </div>
+                        <p class="small-hint">Ця форма використовує метод GET для передачі запиту параметром 'q'.</p>
+                    </form>
+                </div>
+
+                <!-- Форма 2: GET + Readonly (YouTube) -->
+                <div class="form-container">
+                    <h2>Rickroll (форма readonly, веде самі знаєте на який ID відео)</h2>
+                    <form action="https://www.youtube.com/watch" method="get" target="_blank">
+                        <div class="search-group">
+                            <input type="search" name="v" class="search-input" value="dQw4w9WgXcQ" readonly title="Тільки для зчитування">
+                            <button type="submit" class="btn btn-submit">Rickroll</button>
+                        </div>
+                        <p class="small-hint">Ця форма використовує метод GET для передачі запиту параметром 'v'.</p>
+                    </form>
+                </div>
+                
+
+                <!-- Форма 3: POST (Бюрократична форма 2077) -->
+                <div class="form-container">
+                    <h2>Реєстрація відгуку (Cyberpunk 2077 Edition)</h2>
+                    <form action="https://sudohub.dev/servers/debug_post" method="post" enctype="multipart/form-data">
+                        
+                        <!-- Група: Особисті дані -->
+                        <fieldset>
+                            <legend>Ідентифікація особи</legend>
+                            <div class="form-row">
+                                <label for="username">Повне ім'я (ID):</label>
+                                <input type="text" id="username" name="user_fullname" placeholder="Джон Доу" required accesskey="n" tabindex="1">
+                            </div>
+                            <div class="form-row">
+                                <label for="userpass">Пароль доступу до терміналу:</label>
+                                <input type="password" id="userpass" name="user_password" placeholder="••••••••" required tabindex="2">
+                            </div>
+                            <div class="form-row">
+                                <label for="useremail">Біо-пошта (Email):</label>
+                                <input type="email" id="useremail" name="user_email" value="cyber@punk.net" disabled title="Вимкнуто" tabindex="3">
+                            </div>
+                        </fieldset>
+
+                        <!-- Група: Налаштування імплантів -->
+                        <fieldset>
+                            <legend>Специфікації</legend>
+                            <div class="form-row">
+                                <label for="birthdate">Дата активації (Народження):</label>
+                                <input type="date" id="birthdate" name="activation_date" tabindex="4">
+                            </div>
+                            <div class="form-row">
+                                <label for="social_lvl">Рівень соціального кредиту (0-100):</label>
+                                <input type="range" id="social_lvl" name="credit_score" min="0" max="100" value="50" tabindex="5">
+                            </div>
+                            <div class="form-row">
+                                <label for="favcolor">Колір інтерфейсу нейролінка:</label>
+                                <input type="color" id="favcolor" name="ui_color" value="#00ffcc" tabindex="6">
+                            </div>
+                            <div class="form-row">
+                                <label for="faction">Приналежність до фракції:</label>
+                                <select id="faction" name="user_faction" tabindex="7">
+                                    <optgroup label="Корпорації">
+                                        <option value="arasaka">Arasaka</option>
+                                        <option value="militech">Militech</option>
+                                    </optgroup>
+                                    <optgroup label="Вуличні">
+                                        <option value="nomad">Nomads</option>
+                                        <option value="streetkid" selected>Street Kid</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <label for="browser_choice">Бажаний браузер (Datalist):</label>
+                                <input list="browsers" name="preferred_browser" id="browser_choice" placeholder="Оберіть або введіть свій" tabindex="8">
+                                <datalist id="browsers">
+                                    <option value="Netscape 2077">
+                                    <option value="Chrome Quantum">
+                                    <option value="Firefox Neural">
+                                    <option value="Safari Holo">
+                                </datalist>
+                            </div>
+                        </fieldset>
+
+                        <!-- Група: Додатково -->
+                        <fieldset>
+                            <legend>Додаткова інформація</legend>
+                            <div class="form-row">
+                                <label>Наявні модифікації:</label>
+                                <div class="inline-group">
+                                    <input type="checkbox" id="mod1" name="mods" value="eye" tabindex="9">
+                                    <label for="mod1">Кібер-око</label>
+                                </div>
+                                <div class="inline-group">
+                                    <input type="checkbox" id="mod2" name="mods" value="arm" checked tabindex="10">
+                                    <label for="mod2">Механічна рука</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Тип підключення:</label>
+                                <div class="inline-group">
+                                    <input type="radio" id="conn1" name="conn_type" value="wireless" checked tabindex="11">
+                                    <label for="conn1">Бездротове</label>
+                                </div>
+                                <div class="inline-group">
+                                    <input type="radio" id="conn2" name="conn_type" value="wired" tabindex="12">
+                                    <label for="conn2">Дротове (Direct Link)</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="avatar">Завантажити скан сітківки (File):</label>
+                                <input type="file" id="avatar" name="user_scan" accept="image/*" tabindex="13">
+                            </div>
+
+                            <div class="form-row">
+                                <label for="message">Повідомлення системному адміністратору:</label>
+                                <textarea id="message" name="user_msg" rows="5" placeholder="Напишіть ваші скарги на систему тут..." tabindex="14"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Кнопки -->
+                        <div class="btn-group">
+                            <input type="submit" value="Надіслати дані" class="btn btn-submit" tabindex="15">
+                            <input type="reset" value="Скинути форму" class="btn btn-reset" tabindex="16">
+                        </div>
+                    </form>
+                </div>
+
+                 <!-- ФОРМА 4: Input type="image" (Орбітальний удар) -->
+                <div class="form-container">
+                    <h2 class="danger-title">Орбітальний іонний лазер (Targeting System)</h2>
+                    <p class="small muted">Оберіть точку на мапі для наведення лазера. Форма передасть X та Y координати кліку.</p>
+                    <form action="https://sudohub.dev/servers/debug_post" method="get">
+                        <div class="map-container">
+                            <!-- Використовуємо input type="image" замість звичайної кнопки -->
+                            <input type="image" name="orbital_strike" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" alt="World Map">
+                        </div>
+                        <p class="small-hint" style="text-align: center;">Клікніть на мапу, щоб ініціювати послідовність.</p>
+
+                        <input type="button" value="Підготувати лазер" class="btn btn-submit" onclick="alert('Лазер готовий до наведення!')">
+                        
+                        <!--
+                            Приховані ядерні коди, їх побачить лише сервер. 
+                            Взагалі є така штука під назвою CSRF - токени, які використовуються для захисту від несанкціонованих запитів.
+                            CSRF токени часто передають у прихованих полях форми
+                        -->
+                        <input type="hidden" name="auth_code" value="CYBERPUNK2077" />
+                        
+
+                    </form>
+                </div>
+
             </div>
         </div>
 
