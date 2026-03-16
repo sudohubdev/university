@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Terminal — Lab 2.2</title>
+    
+    <!-- Імпорти для Three.js (Вимога: імпорти у head) -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <!-- Вимога: script type="x-shader/x-fragment" -->
+    <script type="x-shader/x-fragment" id="atmosphereFragmentShader">
+        varying vec3 vNormal;
+        void main() {
+            float intensity = pow(0.65 - dot(vNormal, vec3(0, 0, 1.0)), 4.0);
+            gl_FragColor = vec4(0.0, 1.0, 0.8, 1.0) * intensity;
+        }
+    </script>
+    
+    <script type="x-shader/x-vertex" id="atmosphereVertexShader">
+        varying vec3 vNormal;
+        void main() {
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: #141414;
+            --accent: #00ffcc;
+            --danger: #ff003c;
+            --text: #e0e0e0;
+        }
+        body {
+            background-color: var(--bg); color: var(--text);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0; padding: 20px;
+        }
+        h1, h2 { color: var(--accent); text-transform: uppercase; }
+        
+        .grid-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .panel {
+            background: var(--panel); border: 1px solid #333;
+            border-radius: 8px; padding: 20px;
+        }
+        
+        /* Calculator Styles */
+        .calc-display {
+            width: 100%; background: #000; color: var(--accent);
+            font-size: 1.5rem; text-align: right; padding: 10px;
+            border: 1px solid #444; margin-bottom: 10px; box-sizing: border-box;
+        }
+        .calc-modes { margin-bottom: 15px; display: flex; gap: 15px; }
+        .calc-grid {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;
+        }
+        .calc-btn {
+            background: #222; color: #fff; border: 1px solid #444;
+            padding: 15px; font-size: 1.2rem; cursor: pointer; transition: 0.2s;
+        }
+        .calc-btn:hover { background: var(--accent); color: #000; }
+        .calc-btn[data-type="operator"] { background: #333; color: var(--accent); }
+        .calc-btn[data-action="clear"] { background: var(--danger); }
+
+        /* Three.js Container */
+        #canvas-container { width: 100%; height: 300px; background: #000; border: 1px solid var(--accent); }
+        .status-log { background: #000; color: #0f0; padding: 10px; font-size: 0.9rem; height: 100px; overflow-y: auto; margin-top: 10px; }
+        
+        button.action-btn {
+            background: transparent; border: 1px solid var(--accent); color: var(--accent);
+            padding: 10px 20px; cursor: pointer; margin-top: 15px; width: 100%;
+        }
+        button.action-btn:hover { background: var(--accent); color: #000; }
+    </style>
+</head>
+
+<body>
+    <h1>System Terminal v2.2</h1>
+    
+    <div class="grid-layout">
+        <!-- Part 1: Programmer Calculator -->
+        <div class="panel">
+            <h2>Програматор-Калькулятор (ALU)</h2>
+            <div id="calculator">
+                <input type="text" id="calc-display" class="calc-display" value="0" readonly>
+                <div class="calc-modes">
+                    <label><input type="radio" name="base" value="16"> HEX</label>
+                    <label><input type="radio" name="base" value="10" checked> DEC</label>
+                    <label><input type="radio" name="base" value="2"> BIN</label>
+                </div>
+                <div class="calc-grid" id="calc-keys">
+                    <button class="calc-btn" data-val="D">D</button>
+                    <button class="calc-btn" data-val="E">E</button>
+                    <button class="calc-btn" data-val="F">F</button>
+                    <button class="calc-btn" data-action="clear">CLR</button>
+                    <button class="calc-btn" data-type="operator" data-op="~">NOT</button>
+                    
+                    <button class="calc-btn" data-val="A">A</button>
+                    <button class="calc-btn" data-val="B">B</button>
+                    <button class="calc-btn" data-val="C">C</button>
+                    <button class="calc-btn" data-type="operator" data-op="/">/</button>
+                    <button class="calc-btn" data-type="operator" data-op="&">AND</button>
+
+                    <button class="calc-btn" data-val="7">7</button>
+                    <button class="calc-btn" data-val="8">8</button>
+                    <button class="calc-btn" data-val="9">9</button>
+                    <button class="calc-btn" data-type="operator" data-op="*">*</button>
+                    <button class="calc-btn" data-type="operator" data-op="|">OR</button>
+
+                    <button class="calc-btn" data-val="4">4</button>
+                    <button class="calc-btn" data-val="5">5</button>
+                    <button class="calc-btn" data-val="6">6</button>
+                    <button class="calc-btn" data-type="operator" data-op="-">-</button>
+                    <button class="calc-btn" data-type="operator" data-op="^">XOR</button>
+
+                    <button class="calc-btn" data-val="1">1</button>
+                    <button class="calc-btn" data-val="2">2</button>
+                    <button class="calc-btn" data-val="3">3</button>
+                    <button class="calc-btn" data-type="operator" data-op="+">+</button>
+                    <button class="calc-btn" data-type="operator" data-op="<<">&lt;&lt;</button>
+
+                    <button class="calc-btn span-2" data-val="0" style="grid-column: span 2;">0</button>
+                    <button class="calc-btn" data-type="operator" data-op="=">=</button>
+                    <button class="calc-btn" data-type="operator" data-op=">>">&gt;&gt;</button>
+                    <button class="calc-btn" data-type="operator" data-op=">>>">&gt;&gt;&gt;</button>
+                </div>
+            </div>
+            
+            <button class="action-btn" id="run-legacy-tests">Запуск системної діагностики (Лаб 2.2)</button>
+        </div>
+
+        <!-- Part 2: Orbital Laser Targeter -->
+        <div class="panel">
+            <h2>Орбітальний Лазер (Three.js)</h2>
+            <div id="canvas-container"></div>
+            <button id="fire-laser" class="action-btn" style="background:var(--danger); color:#fff; border-color:var(--danger); display:none;">🔥 ВІДКРИТИ ВОГОНЬ 🔥</button>
+            <div class="status-log" id="geo-log">
+                > Очікування координат...<br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основний скрипт з типом module -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+
+        // ---------------------------------------------------------
+        // ЧАСТИНА 1: Калькулятор (Класи, події W3C, операції)
+        // ---------------------------------------------------------
+        class ProgrammerCalc {
+            constructor(displayElement) {
+                this.display = displayElement;
+                this.currentValue = '0';
+                this.operator = null;
+                this.previousValue = null;
+                this.base = 10;
+            }
+
+            setBase(newBase) {
+                let decValue = parseInt(this.currentValue, this.base);
+                if (isNaN(decValue)) decValue = 0;
+                this.base = parseInt(newBase);
+                this.currentValue = decValue.toString(this.base).toUpperCase();
+                this.updateDisplay();
+            }
+
+            append(val) {
+                // Валідація вводу для різних баз (DEC, HEX, BIN)
+                const validHex = /^[0-9A-F]$/i;
+                const validDec = /^[0-9]$/;
+                const validBin = /^[0-1]$/;
+
+                if (this.base === 10 && !validDec.test(val)) return;
+                if (this.base === 2 && !validBin.test(val)) return;
+                if (this.base === 16 && !validHex.test(val)) return;
+
+                if (this.currentValue === '0') this.currentValue = val;
+                else this.currentValue += val;
+                this.updateDisplay();
+            }
+
+            setOperator(op) {
+                this.operator = op;
+                this.previousValue = this.currentValue;
+                this.currentValue = '0';
+            }
+
+            calculate() {
+                if (!this.operator || !this.previousValue) return;
+
+                let a = parseInt(this.previousValue, this.base);
+                let b = parseInt(this.currentValue, this.base);
+                let result = 0;
+
+                // Використання switch (вимога методички)
+                switch (this.operator) {
+                    case '+': result = a + b; break;
+                    case '-': result = a - b; break;
+                    case '*': result = a * b; break;
+                    case '/': result = Math.floor(a / b); break;
+                    case '&': result = a & b; break; // Побітове AND
+                    case '|': result = a | b; break; // Побітове OR
+                    case '^': result = a ^ b; break; // Побітове XOR
+                    case '<<': result = a << b; break; // Зсув вліво
+                    case '>>': result = a >> b; break; // Зсув вправо
+                    case '>>>': result = a >>> b; break; // Беззнаковий зсув вправо
+                }
+
+                this.currentValue = (result >>> 0).toString(this.base).toUpperCase(); // >>> 0 для unsigned
+                this.operator = null;
+                this.previousValue = null;
+                this.updateDisplay();
+            }
+
+            clear() {
+                this.currentValue = '0';
+                this.operator = null;
+                this.previousValue = null;
+                this.updateDisplay();
+            }
+
+            updateDisplay() {
+                this.display.value = this.currentValue;
+            }
+        }
+
+        // ---------------------------------------------------------
+        // ЧАСТИНА 2: Three.js, Fetch, XHR, window.location
+        // ---------------------------------------------------------
+        function logMsg(msg) {
+            const log = document.getElementById('geo-log');
+            log.innerHTML += `> ${msg}<br>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Функція XHR (вимога)
+        function fetchWithXHR(url, callback) {
+            logMsg("XHR: Відправка запиту...");
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+        }
+
+        // Функція Fetch (сучасний стандарт)
+        async function fetchWithModernAPI(url) {
+            logMsg("Fetch: Отримання додаткових даних...");
+            try {
+                const response = await fetch(url);
+                return await response.json();
+            } catch (error) {
+                console.error("Fetch Error:", error);
+            }
+        }
+
+        function initThreeJSLaser(lat, lon) {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            // Вирішення проблеми Гімбалу: створюємо ДВІ групи
+            // 1. Outer Group керує виключно нахилом по широті (обертання навколо глобальної X)
+            const earthOuter = new THREE.Group();
+            scene.add(earthOuter);
+
+            // 2. Inner Group керує виключно спіном по довготі (обертання навколо власної Y)
+            const earthInner = new THREE.Group();
+            earthOuter.add(earthInner);
+
+            // Завантаження SVG текстури мапи світу
+            const textureLoader = new THREE.TextureLoader();
+            const earthTexture = textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg');
+            
+            // Внутрішнє темне ядро
+            const coreGeo = new THREE.SphereGeometry(4.95, 32, 32);
+            const coreMat = new THREE.MeshBasicMaterial({ color: 0x050505 });
+            const core = new THREE.Mesh(coreGeo, coreMat);
+            earthInner.add(core);
+
+            // Створення Землі з накладеною текстурою
+            const geometry = new THREE.SphereGeometry(5, 64, 64);
+            const material = new THREE.MeshPhongMaterial({
+                map: earthTexture,
+                color: 0x00ffcc,       
+                emissive: 0x001122,
+                specular: 0xaaaaaa,
+                shininess: 80,
+                transparent: true,     
+                wireframe: false       
+            });
+            const earth = new THREE.Mesh(geometry, material);
+            earthInner.add(earth);
+
+            // Атмосфера
+            const atmGeo = new THREE.SphereGeometry(5.2, 32, 32);
+            const atmMat = new THREE.ShaderMaterial({
+                vertexShader: document.getElementById('atmosphereVertexShader').textContent,
+                fragmentShader: document.getElementById('atmosphereFragmentShader').textContent,
+                blending: THREE.AdditiveBlending,
+                side: THREE.BackSide,
+                transparent: true
+            });
+            const atmosphere = new THREE.Mesh(atmGeo, atmMat);
+            earthInner.add(atmosphere);
+
+            // Світло
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 3, 5);
+            scene.add(light);
+
+            // Завантаження OBJ для Лазера
+            const loader = new OBJLoader();
+            let laserObj;
+            loader.load(
+                'obj/laser.obj',
+                (object) => {
+                    laserObj = object;
+                    laserObj.position.set(0, 0, 9);
+                    laserObj.lookAt(0, 0, 0); 
+                    laserObj.rotateY(Math.PI / 2); 
+                    scene.add(laserObj);
+                    document.getElementById('fire-laser').style.display = 'block';
+                },
+                undefined,
+                (error) => {
+                    console.warn("OBJ не знайдено, створюємо резервну модель лазера.");
+                    const fallbackGeo = new THREE.CylinderGeometry(0.3, 0.3, 3, 8);
+                    const fallbackMat = new THREE.MeshPhongMaterial({ color: 0x555555, emissive: 0x111111 });
+                    laserObj = new THREE.Mesh(fallbackGeo, fallbackMat);
+                    laserObj.position.set(0, 0, 9);
+                    laserObj.lookAt(0, 0, 0);
+                    laserObj.rotateX(Math.PI / 2); 
+                    scene.add(laserObj);
+                    document.getElementById('fire-laser').style.display = 'block';
+                }
+            );
+
+            // Промінь лазера (спочатку невидимий)
+            const beamGeo = new THREE.CylinderGeometry(0.05, 0.05, 4, 16);
+            const beamMat = new THREE.MeshBasicMaterial({ color: 0xff003c, transparent: true, opacity: 0 });
+            const beam = new THREE.Mesh(beamGeo, beamMat);
+            beam.position.set(0, 0, 7); 
+            beam.rotateX(Math.PI / 2);
+            scene.add(beam);
+
+            // Вибух (сфера)
+            const expGeo = new THREE.SphereGeometry(0.2, 16, 16);
+            const expMat = new THREE.MeshBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0 });
+            const explosion = new THREE.Mesh(expGeo, expMat);
+            explosion.position.set(0, 0, 5); 
+            scene.add(explosion);
+
+            camera.position.set(3, 3, 15);
+            camera.lookAt(0, 0, 5); 
+
+            // Змінні для керування анімацією наведення
+            // Широта обробляється Outer групою. +X обертання нахиляє північ (+Y) до камери (+Z).
+            const targetRotX = lat * (Math.PI / 180);
+            
+            // Довгота обробляється Inner групою.
+            // Центр мапи (Lon 0) у SphereGeometry знаходиться на осі -Z.
+            // Щоб повернути задану довготу на лицьову сторону (+Z), робимо зсув на -180 градусів.
+            const targetRotY = (lon - 180) * (Math.PI / 180); 
+            
+            let isAiming = false;
+            let isFiring = false;
+            let fireTime = 0;
+
+            document.getElementById('fire-laser').addEventListener('click', () => {
+                if (isAiming || isFiring) return;
+                isAiming = true;
+                logMsg("> СИСТЕМА НАВЕДЕННЯ: Синхронізація орбіти...");
+            });
+
+            // Анімація
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                if (isAiming) {
+                    // 1. Інтерполяція широти (нахил цілі до екватора)
+                    earthOuter.rotation.x += (targetRotX - earthOuter.rotation.x) * 0.04;
+                    
+                    // 2. Інтерполяція довготи (прокрутка меридіана)
+                    let dy = targetRotY - earthInner.rotation.y;
+                    dy = Math.atan2(Math.sin(dy), Math.cos(dy));
+                    earthInner.rotation.y += dy * 0.04;
+
+                    // Перевіряємо, чи досягла планета цільової орієнтації
+                    if (Math.abs(targetRotX - earthOuter.rotation.x) < 0.005 && Math.abs(dy) < 0.005) {
+                        earthOuter.rotation.x = targetRotX;
+                        earthInner.rotation.y = targetRotY;
+                        
+                        // Перемикаємось на режим стрільби
+                        isAiming = false;
+                        isFiring = true;
+                        fireTime = 0;
+                        beam.material.opacity = 1;
+                        explosion.material.opacity = 1;
+                        explosion.scale.set(1, 1, 1);
+                        logMsg("!!! ОРБІТАЛЬНИЙ УДАР ІНІЦІЙОВАНО !!!");
+                    }
+                } else if (!isFiring) {
+                    // Режим очікування: Земля крутиться по своїй власній осі (Inner Y)
+                    earthInner.rotation.y += 0.002; 
+                } else {
+                    // Анімація пострілу
+                    fireTime += 0.016;
+                    if (fireTime < 0.5) {
+                        beam.material.opacity = Math.random() > 0.2 ? 1 : 0.4;
+                        explosion.scale.addScalar(0.05);
+                    } else if (fireTime < 1.5) {
+                        beam.material.opacity = 0; 
+                        explosion.material.opacity -= 0.02; 
+                        explosion.scale.addScalar(0.02);
+                    } else {
+                        isFiring = false;
+                        explosion.material.opacity = 0;
+                        beam.material.opacity = 0;
+                    }
+                }
+
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // ---------------------------------------------------------
+        // ІНІЦІАЛІЗАЦІЯ (DOM Маніпуляції та DOMContentLoaded)
+        // ---------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Ініціалізація калькулятора (робота з класами та атрибутами)
+            const display = document.getElementById('calc-display');
+            const calc = new ProgrammerCalc(display);
+
+            // Обробник W3C (addEventListener)
+            document.getElementById('calc-keys').addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON') return;
+                
+                const val = e.target.getAttribute('data-val');
+                const action = e.target.getAttribute('data-action');
+                const op = e.target.getAttribute('data-op');
+
+                if (val) calc.append(val);
+                if (action === 'clear') calc.clear();
+                if (op === '~') { // Унарний оператор NOT застосовується одразу
+                    let currentNum = parseInt(calc.currentValue, calc.base);
+                    calc.currentValue = (~currentNum >>> 0).toString(calc.base).toUpperCase();
+                    calc.updateDisplay();
+                } else if (op === '=') {
+                    calc.calculate();
+                } else if (op) {
+                    calc.setOperator(op);
+                }
+            });
+
+            // Обробка зміни систем числення (DOM маніпуляція через масив)
+            document.querySelectorAll('input[name="base"]').forEach(radio => {
+                radio.addEventListener('change', (e) => calc.setBase(e.target.value));
+            });
+
+            // 2. Ініціалізація Орбітальної системи (URL Parsing)
+            const params = new URLSearchParams(window.location.search);
+            
+            // Задаємо дефолтні значення центру мапи (якщо зайшли без параметрів)
+            const clickX = parseFloat(params.get('orbital_strike.x')) || (4378 / 2); 
+            const clickY = parseFloat(params.get('orbital_strike.y')) || (2434 / 2);
+
+            // Точні оригінальні розміри вашої мапи
+            const mapWidth = 4378;
+            const mapHeight = 2434;
+
+            // Конвертація пікселів:
+            let lon = (clickX / mapWidth) * 360 - 180;
+            let lat = -((clickY / mapHeight) * 180 - 90);
+
+            // Жорстко обмежуємо координати, щоб не зламати API
+            lon = ((lon + 180) % 360 + 360) % 360 - 180; 
+            lat = Math.max(-90, Math.min(90, lat));
+            
+            const gmapsLink = `https://www.google.com/maps?q=${lat.toFixed(5)},${lon.toFixed(5)}`;
+            logMsg(`Обробка X:${clickX}, Y:${clickY} -> Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`);
+            logMsg(`<a href="${gmapsLink}" target="_blank" style="color:var(--accent); text-decoration:underline;">🌍 Перевірити ціль у Google Maps</a>`);
+
+            // Запуск 3D 
+            initThreeJSLaser(lat, lon);
+
+            // Запит API через XHR (Reverse Geocoding OpenStreetMap)
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+            fetchWithXHR(apiUrl, (data) => {
+                if(data.error) logMsg("Ціль: Океан / Невідома територія.");
+                else logMsg(`Ціль підтверджена: ${data.display_name}`);
+                
+                // Також робимо через Fetch як демонстрацію
+                fetchWithModernAPI(apiUrl).then(res => {
+                    logMsg("Дані з Fetch API успішно синхронізовано.");
+                });
+            });
+
+            // 3. Підключення legacy-скрипту (властивість об'єкта)
+            document.getElementById('run-legacy-tests').onclick = runLegacyTests;
+        });
+
+        // ---------------------------------------------------------
+        // ЧАСТИНА 3: Вимоги Лаб 2.2 (Масиви, Цикли, Функції, I/O)
+        // ---------------------------------------------------------
+        function runLegacyTests() {
+            const proceed = confirm("Запустити комплексну перевірку (Лаб 2.2)?");
+            if (!proceed) return;
+
+            const userName = prompt("Введіть ID оператора:", "Admin");
+            
+            let typeString = "Hello";
+            let typeNumber = 2077;
+            let typeBool = true;
+            let typeNull = null;
+            let typeUndefined;
+            let typeNaN = parseInt("Error");
+
+            console.log("Типи даних:");
+            console.log(`typeString: ${typeof typeString}`);
+            console.log(`typeNumber: ${typeof typeNumber}`);
+            console.log(`typeBool: ${typeof typeBool}`);
+            console.log(`typeNull: ${typeof typeNull}`);
+            console.log(`typeUndefined: ${typeof typeUndefined}`);
+            
+            let sysCodes = [404, 200, 500, 301, 101];
+            console.log("Оригінальний масив:", sysCodes);
+            sysCodes.push(418); 
+            sysCodes.shift();   
+            sysCodes.sort();    
+            sysCodes.reverse(); 
+            
+            let arrayStr = sysCodes.join(" -> ");
+            console.log("Трансформований масив:", arrayStr);
+
+            let loopOutput = "";
+            for(let i = 0; i < 3; i++) { loopOutput += i + " "; }
+            
+            let j = 0;
+            while(j < 2) { loopOutput += "w "; j++; }
+            
+            do { loopOutput += "d "; } while (false);
+
+            const checkStatus = function(code) {
+                return (code === 200) ? "OK" : "ERROR";
+            };
+
+            if (userName) {
+                alert(`Діагностика завершена, ${userName}.\nМасив: ${arrayStr}\nЦикли: ${loopOutput}\nСтатус 200: ${checkStatus(200)}`);
+            } else {
+                alert("Користувач невідомий.");
+            }
+        }
+    </script>
+</body>
+</html>
