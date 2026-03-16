@@ -380,9 +380,9 @@
             const targetRotX = lat * (Math.PI / 180);
             
             // Довгота обробляється Inner групою.
-            // Центр мапи (Lon 0) у SphereGeometry знаходиться на осі -Z.
-            // Щоб повернути задану довготу на лицьову сторону (+Z), робимо зсув на -180 градусів.
-            const targetRotY = (lon - 180) * (Math.PI / 180); 
+            // У Three.js SphereGeometry центр текстури (Lon=0) за замовчуванням лягає на вісь +X.
+            // Щоб повернути будь-яку довготу рівно до камери (+Z), використовуємо формулу зміщення -90 градусів:
+            const targetRotY = (-lon - 90) * (Math.PI / 180); 
             
             let isAiming = false;
             let isFiring = false;
