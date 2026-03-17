@@ -71,7 +71,7 @@
             background: #222; color: #fff; border: 1px solid #444;
             padding: 15px; font-size: 1.2rem; cursor: pointer; transition: 0.2s;
         }
-        .calc-btn:hover { background: var(--accent); color: #000; }
+        .calc-btn:hover { background: var(--accent) !important; color: #000 !important; }
         .calc-btn[data-type="operator"] { background: #333; color: var(--accent); }
         .calc-btn[data-action="clear"] { background: var(--danger); }
 
@@ -477,7 +477,8 @@
 
             // Обробка зміни систем числення (DOM маніпуляція через масив)
             document.querySelectorAll('input[name="base"]').forEach(radio => {
-                radio.addEventListener('change', (e) => calc.setBase(e.target.value));
+                radio.addEventListener('change', (e) =>
+                 calc.setBase(e.target.value));
             });
 
             // 2. Ініціалізація Орбітальної системи (URL Parsing)
