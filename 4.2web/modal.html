@@ -1,0 +1,38 @@
+<!--Примітка: Це не повноцінний HTML-документ, а фрагмент динамічного коду-->
+<div id="satire-modal-overlay" class="modal-overlay">
+    <div id="satire-modal-content" class="modal-content">
+
+        <!-- Кнопка-втікач -->
+        <button id="runaway-btn" class="runaway-btn">&times;</button>
+
+        <h2 class="modal-title">Ми дбаємо про вашу приватність! 🛡️</h2>
+        <p class="modal-subtitle">Щоб забезпечити найкращий досвід, ми збираємо лише <em>абсолютно необхідні</em> дані.
+            Будь ласка, перевірте їх (ви все одно не можете це змінити):</p>
+
+        <div class="data-box">
+            <p><span class="data-label">🕒 Дата:</span> {CurrentDate}</p>
+            <p><span class="data-label">🌐 Ваша IP-адреса:</span> {IP}</p>
+            <p><span class="data-label">👀 Кількість візитів:</span> {Visits}</p>
+            <p><span class="data-label">📏 Розмір пітона:</span> {Size} см (зафіксовано)</p>
+            <p><span class="data-label">🐶 Улюблена собака:</span> {Dog}</p>
+            <hr>
+            <p class="user-agent">Браузер: {UserAgent}</p>
+        </div>
+
+        <div class="range-group">
+            <label>Рівень згоди на збір даних:</label>
+            <input type="range" min="99" max="100" value="100" class="range-input" title="Вибір без вибору" >
+            <div class="range-labels">
+                <span>Максимальний</span>
+                <span>Абсолютний</span>
+            </div>
+        </div>
+
+        <!-- DOM Маніпуляція: контейнер для динамічних повідомлень -->
+        <div id="dynamic-message-container" class="msg-box"></div>
+
+        <button id="accept-all-btn" class="accept-btn">
+            ПРИЙНЯТИ ВСЕ ТА ПРОДАТИ ДУШУ
+        </button>
+    </div>
+</div>
