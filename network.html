@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Networking Cheatsheet</title>
+<style>
+    :root {
+        --bg-color: #f4f7f6;
+        --card-bg: #ffffff;
+        --text-main: #333333;
+        --text-muted: #666666;
+        --accent: #0056b3;
+        --code-bg: #1e1e1e;
+        --code-text: #d4d4d4;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        color: var(--accent);
+        margin-bottom: 5px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 20px;
+        border-top: 4px solid var(--accent);
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 1.25rem;
+        color: var(--accent);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+    }
+
+    li {
+        margin-bottom: 12px;
+    }
+
+    code {
+        background-color: #e9ecef;
+        color: #d63384;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.9em;
+    }
+
+    pre {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    pre code {
+        background-color: transparent;
+        color: inherit;
+        padding: 0;
+    }
+
+    .note {
+        font-size: 0.85em;
+        color: var(--text-muted);
+        font-style: italic;
+    }
+
+    /* Print Styles to ensure it looks good on paper */
+    @media print {
+        body {
+            background-color: white;
+            padding: 0;
+        }
+        .grid-container {
+            display: block; /* Fallback for older printers */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .card {
+            box-shadow: none;
+            border: 1px solid #ccc;
+            page-break-inside: avoid; /* Prevents card from splitting across pages */
+            margin-bottom: 15px;
+        }
+        pre {
+            white-space: pre-wrap; /* Ensures code wraps on paper instead of scrolling */
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Linux Networking Cheatsheet</h1>
+    <p>Diagnostics, Routing, and Quick Setups</p>
+</header>
+
+<div class="grid-container">
+
+    <div class="card">
+        <h2>1. Interface & Routing (iproute2)</h2>
+        <ul>
+            <li><code>ip l</code> : List all network interfaces (L2/MAC).</li>
+            <li><code>ip l set eth0 up</code> : Bring interface up.</li>
+            <li><code>ip a</code> : List all IP addresses.</li>
+            <li><code>ip a add 192.168.1.10/24 dev eth0</code> : Assign temporary IPv4.</li>
+            <li><code>ip r</code> : Display IPv4 routing table.</li>
+            <li><code>ip r add default via 192.168.1.1</code> : Set default gateway.</li>
+            <li><code>ip n</code> : Show ARP table (IPv4) / NDP table (IPv6).</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>2. Port Checks (netstat & ss)</h2>
+        <p class="note">Run as root to see PIDs.</p>
+        <ul>
+            <li><code>netstat -tuln</code> : Show TCP/UDP Listening ports (Numbers only).</li>
+            <li><code>netstat -tupan</code> : Show active connections + Program/PID.</li>
+            <li><code>netstat -rn</code> : Display kernel routing table.</li>
+            <li><code>ss -tuln</code> : Modern, faster alternative to netstat.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>3. Packet Capture (tcpdump)</h2>
+        <ul>
+            <li><code>tcpdump -i eth0</code> : Capture all on eth0.</li>
+            <li><code>tcpdump -i eth0 -n</code> : Disable DNS resolution (faster).</li>
+            <li><code>tcpdump -i eth0 port 80</code> : Filter by HTTP traffic.</li>
+            <li><code>tcpdump -i eth0 host 10.0.0.5</code> : Filter by specific IP.</li>
+            <li><code>tcpdump -i eth0 -vvv -X</code> : Verbose, show HEX and ASCII.</li>
+            <li><code>tcpdump -i eth0 -w cap.pcap</code> : Write to file for Wireshark.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>4. IPv6 Focus</h2>
+        <ul>
+            <li><code>ip -6 a</code> : Show only IPv6 addresses.</li>
+            <li><code>ip -6 r</code> : Show IPv6 routing table.</li>
+            <li><code>ip -6 addr add 2001:db8::1/64 dev eth0</code> : Assign static IPv6.</li>
+            <li><code>ip -6 r add 2001:db8::1/64 via 2001:db8::1 dev eth0</code> : Assign static IPv6 Route.</li>
+            <li><code>ip -6 neigh</code> : View IPv6 neighbor cache (NDP).</li>
+            <li><code>ping6 2001:db8::1</code> : Ping IPv6 address.</li>
+            <li><code>sysctl -w net.ipv6.conf.all.forwarding=1</code> : Enable IPv6 routing.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>5. Quick L2 Bridge</h2>
+        <p>Connects interfaces at Layer 2.</p>
+<pre><code># Create bridge & attach interfaces
+ip link add name br0 type bridge
+ip link set dev eth0 master br0
+ip link set dev eth1 master br0
+
+# Bring everything up
+ip link set dev br0 up
+ip link set dev eth0 up
+ip link set dev eth1 up</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>6. Quick NAT (IPv4 & IPv6)</h2>
+        <p>Assuming eth0 is WAN and eth1 is LAN.</p>
+<pre><code># Enable forwarding
+sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv6.conf.all.forwarding=1
+
+# Set up Masquerading (NAT)
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>7. Quick DHCP (dnsmasq)</h2>
+        <p>Fast temporary DHCP/DNS server on eth1.</p>
+<pre><code># Listen on eth1, hand out .50 to .150
+dnsmasq -d \
+  --interface=eth1 \
+  --dhcp-range=192.168.1.50,192.168.1.150,12h</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>8. WiFi AP (hostapd)</h2>
+        <p>1. Create <code>/etc/hostapd/minimal.conf</code>:</p>
+<pre><code>interface=wlan0
+driver=nl80211
+ssid=MyLinuxAP
+hw_mode=g
+channel=6
+wpa=2
+wpa_passphrase=SuperSecretPassword
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP</code></pre>
+        <p>2. Start the Access Point:</p>
+<pre><code>hostapd -d /etc/hostapd/minimal.conf</code></pre>
+    </div>
+
+</div>
+
+</body>
+</html>
