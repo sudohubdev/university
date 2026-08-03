@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Налаштування Середовища Розробки ATtiny</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .section-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .section-body {
+            padding: 2rem;
+            background-color: #fff;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        .badge-pro {
+            background-color: #198754;
+        }
+
+        .badge-con {
+            background-color: #dc3545;
+        }
+
+        .comparison-card {
+            height: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: none;
+            transition: transform 0.2s;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+
+        pre {
+            background-color: #212529;
+            color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #343a40;
+        }
+
+        .alert-info-custom {
+            background-color: #e3f2fd;
+            border-left: 5px solid #0d6efd;
+            color: #084298;
+        }
+
+        .alert-warning-custom {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-ai {
+            background-color: #f3e5f5;
+            border-left: 5px solid #9c27b0;
+            color: #4a148c;
+        }
+
+        /* Custom styles for tabs mimicking MS Docs */
+        .nav-tabs-custom {
+            border-bottom: 2px solid #e9ecef;
+            gap: 0.5rem;
+        }
+
+        .nav-tabs-custom .nav-link {
+            border: none;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            border-radius: 0;
+        }
+
+        .nav-tabs-custom .nav-link:hover {
+            color: #495057;
+            border-bottom-color: #adb5bd;
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+            background-color: transparent;
+            font-weight: 600;
+        }
+
+        .tab-content-custom {
+            background-color: #fafbfc;
+            border: 1px solid #e9ecef;
+            border-top: none;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .img-placeholder {
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container main-container">
+
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary"><i class="bi bi-tools"></i> Налаштування Середовища Розробки та
+                Компіляція Коду</h1>
+            <p class="lead text-secondary">для ATtiny412 / ATtiny1624 (megaTinyCore)</p>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3">Пролог: Переваги та Недоліки "голих" ATtiny</h2>
+            </div>
+            <div class="section-body">
+                <p>Коли ви переходите від використання готових плат (як-от Arduino Nano) до роботи з окремими
+                    мікроконтролерами (bare-metal chips), ви отримуєте повний контроль над "залізом", але берете на себе
+                    частину інженерної рутини.</p>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6">
+                        <div class="p-4 bg-light rounded h-100 border-start border-success border-4">
+                            <h4 class="text-success"><i class="bi bi-check-circle-fill"></i> Переваги</h4>
+                            <ul class="mt-3 ps-3">
+                                <li class="mb-2"><strong>Мініатюрність:</strong> Ідеально для власних друкованих плат
+                                    (PCB).</li>
+                                <li class="mb-2"><strong>Енергоефективність:</strong> Споживання у режимі сну складає
+                                    мікроампери (Deep Sleep).</li>
+                                <li class="mb-2"><strong>Вартість:</strong> Чип коштує центи.</li>
+                                <li><strong>Сучасна архітектура:</strong> Event System, CCL.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 bg-light rounded h-100 border-start border-danger border-4">
+                            <h4 class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Виклики</h4>
+                            <ul class="mt-3 ps-3">
+                                <li class="mb-2"><strong>Складність макетування:</strong> Потребує SMD-пайки або
+                                    адаптерів.</li>
+                                <li class="mb-2"><strong>Відсутність "Plug-and-Play" USB:</strong> Потрібен зовнішній
+                                    програматор (UPDI).</li>
+                                <li><strong>Апаратна обв'язка:</strong> Для готових проєктів необхідно додати керамічні
+                                    конденсатори по живленню та лінійний стабілізатор (LDO).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1.5: Theory -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3"><i class="bi bi-book"></i> Теоретичні відомості</h2>
+            </div>
+            <div class="section-body">
+
+                <h4 class="mb-3">Архітектура tinyAVR 0/1/2-series</h4>
+                <p>Новітні мікроконтролери AVR (такі як ATtiny412, ATtiny1624, ATmega4809) суттєво відрізняються від
+                    класичних моделей (наприклад, ATmega328P, що використовується в Arduino Uno). Вони базуються на
+                    оновленій архітектурі <strong>AVRxt</strong>. Основні архітектурні інновації включають:</p>
+                <ul>
+                    <li><strong>Єдиний адресний простір:</strong> Flash-пам'ять, SRAM, EEPROM та регістри вводу-виводу
+                        відображаються в єдиному лінійному адресному просторі.</li>
+                    <li><strong>Event System (EVSYS):</strong> Апаратна маршрутизація сигналів. Дозволяє периферійним
+                        пристроям взаємодіяти між собою без використання переривань і участі центрального процесора
+                        (CPU). Це критично важливо для жорсткого реального часу та енергозбереження.</li>
+                    <li><strong>Configurable Custom Logic (CCL):</strong> Вбудовані програмовані логічні вентилі (LUT -
+                        Look-Up Tables). Дозволяють реалізувати апаратну логіку (AND, OR, NAND, тригери) безпосередньо
+                        на кристалі, що здатна працювати навіть у режимі глибокого сну.</li>
+                </ul>
+
+                <h4 class="mb-3 mt-4">Протокол програмування UPDI</h4>
+                <p>Замість класичного 6-пінового інтерфейсу ISP (SPI-подібного), нові мікроконтролери використовують
+                    <strong>UPDI (Unified Program and Debug Interface)</strong>. Це пропрієтарний напівдуплексний
+                    однопровідний асинхронний інтерфейс для програмування та налагодження.
+                </p>
+                <div class="alert alert-info-custom p-3">
+                    <i class="bi bi-info-circle-fill me-2"></i> Протокол фізично базується на стандартному UART, але
+                    використовує один і той самий провід (пін PA0) як для прийому (RX), так і для передачі (TX) даних з
+                    автоматичним визначенням швидкості (Auto-Baud).
+                </div>
+
+                <h4 class="mb-3 mt-4">Даташити від Microchip</h4>
+                <p>Для детального ознайомлення з архітектурою та можливостями tinyAVR, рекомендується звернутися до
+                    офіційних даташитів від Microchip:</p>
+                <ul>
+                    <li><a href="https://www.microchip.com/en-us/product/attiny1624" target="_blank">ATtiny1624 Data
+                            Sheet</a></li>
+                    <li><a href="https://www.microchip.com/en-us/product/attiny412" target="_blank">ATtiny412 Data
+                            Sheet</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Section: Toolchain Pipeline -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3"><i class="bi bi-diagram-3-fill"></i> Трансляція коду: від C/C++ до .hex файлу</h2>
+            </div>
+            <div class="section-body">
+                <p>Середовище <strong>PlatformIO (або Arduino IDE)</strong> не є компілятором само по собі. Це оркестратор, який зчитує
+                    конфігурацію (<code>platformio.ini (або параметри плати)</code>) та автоматично викликає стандартний набір інструментів
+                    розробника (<strong>Toolchain</strong>), у нашому випадку — пакет <code>avr-gcc</code>.</p>
+
+                <p class="mb-4">Процес перетворення тексту програми (вихідного коду) на машинний код, зрозумілий
+                    мікроконтролеру, складається з трьох послідовних етапів:</p>
+
+                <div class="row position-relative">
+                    <div class="col-12">
+                        <ol class="list-group list-group-numbered list-group-flush mb-4 bg-transparent">
+                            <li class="list-group-item bg-transparent border-bottom py-3">
+                                <h5 class="d-inline text-primary ms-2 mb-1">Компіляція (Compilation)</h5>
+                                <p class="mb-0 ms-4 mt-2 text-muted small">Перетворення чистого C/C++ коду на машинний
+                                    код — створення <strong>об'єктних файлів</strong> (з розширенням <code>.o</code>).
+                                    Вони містять нулі та одиниці (машинні інструкції), але адреси пам'яті для функцій та
+                                    змінних у них ще відносні, а не остаточні.</p>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom py-3">
+                                <h5 class="d-inline text-primary ms-2 mb-1">Лінкування (Linking)</h5>
+                                <p class="mb-0 ms-4 mt-2 text-muted small">Робота компонувальника.
+                                    Він збирає всі об'єктні файли вашого проєкту, об'єднує їх зі скомпільованими файлами
+                                    ядра (megaTinyCore) та стандартними бібліотеками, створюючи єдиний файл формату
+                                    <strong>.elf</strong> (Executable and Linkable Format). Саме тут усім змінним та
+                                    функціям призначаються їхні остаточні абсолютні фізичні адреси у Flash та SRAM
+                                    пам'яті.</p>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 py-3">
+                                <h5 class="d-inline text-primary ms-2 mb-1">Генерація прошивки</h5>
+                                <p class="mb-0 ms-4 mt-2 text-muted small">Файл <code>.elf</code> містить багато зайвої
+                                    для мікроконтролера інформації (наприклад, таблиці символів для дебагу). Спеціальна
+                                    утиліта <code>avr-objcopy</code> "вирізає" з нього лише чистий машинний код і
+                                    перетворює його у текстовий формат <strong>HEX (<code>.hex</code>)</strong>.
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <img src="attiny_guide/compile_process.png" class="img-fluid rounded border shadow-sm mb-4"
+                    alt="Toolchain Pipeline" style="max-height: 400px; object-fit: contain; text-align: center; display: block; margin-left: auto; margin-right: auto;">
+
+                <div class="alert alert-info-custom p-3 mt-2 rounded">
+                    <i class="bi bi-info-circle-fill me-2"></i> <strong>Фінал:</strong> Саме цей підготовлений файл
+                    <code>.hex</code> інструмент-завантажувач (avrdude або pyupdi) відправляє побайтово через єдиний
+                    дріт (SerialUPDI) безпосередньо у Flash-пам'ять мікроконтролера ATtiny.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Обладнання та Підключення -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3"><i class="bi bi-usb-plug-fill"></i> Ідентифікація Обладнання та Підключення</h2>
+            </div>
+            <div class="section-body">
+
+                <!-- Схема програматора (Tabs) -->
+                <h4 class="mb-3">Схема підключення програматора</h4>
+                <p>Оберіть метод прошивки, який ви будете використовувати:</p>
+
+                <ul class="nav nav-tabs nav-tabs-custom" id="programmerTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="serialupdi-tab" data-bs-toggle="tab"
+                            data-bs-target="#serialupdi" type="button" role="tab" aria-controls="serialupdi"
+                            aria-selected="true">
+                            <i class="bi bi-lightning-charge"></i> SerialUPDI (Рекомендовано)
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="jtag2updi-tab" data-bs-toggle="tab" data-bs-target="#jtag2updi"
+                            type="button" role="tab" aria-controls="jtag2updi" aria-selected="false">
+                            <i class="bi bi-cpu"></i> jtag2updi (Через Arduino)
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content tab-content-custom mb-5" id="programmerTabContent">
+                    <!-- SerialUPDI Content -->
+                    <div class="tab-pane fade show active" id="serialupdi" role="tabpanel"
+                        aria-labelledby="serialupdi-tab">
+
+                        <div class="text-center mb-4">
+                            <img src="attiny_guide/using_deadbugging.jpg" class="img-fluid rounded border shadow-sm"
+                                alt="Схема підключення SerialUPDI">
+                        </div>
+
+                        <h5>Перетворення USB-UART на SerialUPDI</h5>
+                        <p>Використовується будь-який дешевий USB-UART конвертер (CH340, CP2102, FT232).</p>
+                        <div class="alert alert-warning-custom p-3">
+                            <strong>Схема:</strong> З'єднайте контакти <strong>RX</strong> та <strong>TX</strong> вашого
+                            конвертера через резистор номіналом <strong>4.7 кОм</strong> (допустимо від 1k до 4.7k). Цей
+                            єдиний спільний провід підключіть до піна <strong>UPDI (PA0)</strong> на мікроконтролері.
+                        </div>
+                        <ul>
+                            <li><strong>VCC (UART)</strong> ➔ <strong>VDD (ATtiny)</strong> (переконайтеся, що рівні
+                                напруги збігаються, напр. 5V до 5V).</li>
+                            <li><strong>GND (UART)</strong> ➔ <strong>GND (ATtiny)</strong></li>
+                            <li><strong>RX + TX (через резистор)</strong> ➔ <strong>UPDI (PA0)</strong></li>
+                        </ul>
+                        <p class="text-muted small mt-2"><i class="bi bi-check-circle"></i> <strong>Переваги:</strong>
+                            Нативно підтримується PlatformIO (через pyupdi), максимальна швидкість прошивки, займає
+                            мінімум місця.</p>
+
+
+                        <div class="alert alert-warning-custom p-3">
+                            <h6 class="fw-bold mb-2"><i class="bi bi-question-circle-fill me-2"></i>Навіщо резистор?
+                            </h6>
+                            <p class="mb-2 small">Він виконує дві критичні функції для апаратного узгодження:</p>
+                            <ul class="mb-0 small ps-3">
+                                <li class="mb-1"><strong>Об'єднання ліній:</strong> Перетворює двопровідний UART
+                                    (<strong>Full-Duplex</strong>) на однопровідний UPDI (<strong>Half-Duplex</strong>).
+                                    При <strong>Half-Duplex</strong> з'єднанні, мікроконтролер та ПК спілкуються не
+                                    одночасно, a <strong>по черзі.</strong></li>
+                                <li><strong>Захист від короткого замикання:</strong> Бере на себе різницю напруг, коли
+                                    мікроконтролер відповідає (тягне лінію до <code>LOW</code>), а вивід TX конвертера
+                                    продовжує тримати високий рівень напруги (<code>HIGH</code>).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- jtag2updi Content -->
+                    <div class="tab-pane fade" id="jtag2updi" role="tabpanel" aria-labelledby="jtag2updi-tab">
+
+                        <div class="text-center mb-4">
+                            <img src="attiny_guide/using_zifpanel.jpg" class="img-fluid rounded border shadow-sm"
+                                alt="Схема підключення jtag2updi">
+                        </div>
+
+                        <h5>Використання Arduino Uno/Nano як програматора</h5>
+                        <p>Якщо у вас немає USB-UART, але є Arduino, ви можете зробити програматор з неї.</p>
+                        <ol>
+                            <li>Завантажте прошивку <strong>jtag2updi</strong> <a
+                                    href="https://github.com/ElTangas/jtag2updi" target="_blank">з GitHub</a>.</li>
+                            <li>Відкрийте завантажений проєкт в Arduino IDE і прошийте його у вашу Arduino Uno/Nano як
+                                звичайний скетч.</li>
+                            <li><strong>Важливо:</strong> Після прошивки вставте конденсатор <strong>10 мкФ</strong> між
+                                пінами <code>RESET</code> та <code>GND</code> на Arduino (це запобігає її
+                                перезавантаженню під час прошивки ATtiny). У автора працювало і без конденсатора, але з
+                                ним буде менше проблем.</li>
+                        </ol>
+                        <div class="alert alert-warning-custom p-3 mt-3">
+                            <strong>Схема підключення:</strong>
+                            <ul class="mb-0">
+                                <li><strong>D6 (Arduino)</strong> ➔ через резистор 4.7 кОм ➔ <strong>UPDI (PA0 на
+                                        ATtiny)</strong> (напряму теж працювало, але не рекомендовано)</li>
+                                <li><strong>5V (Arduino)</strong> ➔ <strong>VDD (ATtiny)</strong></li>
+                                <li><strong>GND (Arduino)</strong> ➔ <strong>GND (ATtiny)</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Порівняння Монтажу -->
+                <h4 class="mb-3">Фізичний монтаж мікроконтролера</h4>
+
+                <div class="row g-4">
+                    <!-- Top Row (2 columns with VS badge) -->
+                    <div class="col-12 position-relative">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card comparison-card overflow-hidden">
+                                    <img src="attiny_guide/using_deadbugging.jpg" class="card-img-top img-placeholder"
+                                        style="height: 400px;" alt="Deadbugging">
+                                    <div class="card-body">
+                                        <h5 class="text-center mb-3">Deadbugging</h5>
+                                        <p class="text-muted small">Припаювання дротів безпосередньо до ніжок SMD-чипа
+                                            (часто догори дригом, так зручніше). Потребує лише навичок пайки та твердої
+                                            руки. Якщо випадково злиплися
+                                            ніжки - капніть флюсом, проведіть паяльником, і підпаюйтесь знову.</p>
+                                        <ul class="list-unstyled mt-2">
+                                            <li><span class="badge badge-pro me-2">Плюс</span> Швидкий старт, не треба
+                                                додаткового обладнання.</li>
+                                            <li class="mt-2"><span class="badge badge-con me-2">Мінус</span> Крихка
+                                                конструкція, важко підключати периферію.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card comparison-card overflow-hidden">
+                                    <img src="attiny_guide/using_zifpanel.jpg" class="card-img-top img-placeholder"
+                                        style="height: 400px;" alt="SMD ZIF Панелька">
+                                    <div class="card-body">
+                                        <h5 class="text-center mb-3">SMD ZIF Панелька (SOIC16 ZIF)</h5>
+                                        <p class="text-muted small">Плата-перехідник, що розводить дрібні SMD піни на
+                                            стандартний крок 2.54 мм. Дозволяє легко замінювати мікроконтролери без
+                                            необхідності пайки.</p>
+                                        <ul class="list-unstyled mt-2">
+                                            <li><span class="badge badge-pro me-2">Плюс</span> Ідеально стає у
+                                                breadboard.</li>
+                                            <li><span class="badge badge-pro me-2">Плюс</span> Не треба паяти SMD.</li>
+                                            <li class="mt-2"><span class="badge badge-con me-2">Мінус</span> Потребує
+                                                придбання ZIF панельки.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row (Full width) -->
+                    <div class="col-12 mt-4">
+                        <div class="card comparison-card p-0 overflow-hidden border-primary">
+                            <div class="row g-0 align-items-center">
+                                <div class="col-md-5" style="position: relative; height: 100%;">
+                                    <img src="attiny_guide/using_pcb.jpg" class="img-fluid h-100 w-100 img-placeholder"
+                                        style="height: 100%;" alt="Ready-made board">
+                                </div>
+                                <div class="col-md-7 p-4">
+                                    <h5 class="mb-3 text-primary"><i
+                                            class="bi bi-star-fill text-warning me-2"></i>Готова плата з
+                                        мікроконтролером (Dev Board)</h5>
+                                    <p class="text-muted">Саморобні плати з розпаяним мікроконтролером
+                                        ATtiny, виведеними пінами, периферією і (часто) стабілізатором живлення.</p>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-6">
+                                            <ul class="list-unstyled">
+                                                <li class="mb-2"><span class="badge badge-pro me-2">Плюс</span>
+                                                    Максимальна компактність.</li>
+                                                <li><span class="badge badge-pro me-2">Плюс</span> Надійна конструкція.
+                                                </li>
+                                                <li><span class="badge badge-pro me-2">Плюс</span> Остаточне рішення для
+                                                    готових (налагоджених) проєктів.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ul class="list-unstyled">
+                                                <li class="mb-2"><span class="badge badge-con me-2">Мінус</span> Довгий
+                                                    процес виготовлення.</li>
+                                                <li><span class="badge badge-con me-2">Мінус</span> Поганий варіант для
+                                                    прототипування. Кожна дрібна модифікація
+                                                    потребує виготовлення нової плати.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 3: Інструкція по IDE -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3"><i class="bi bi-laptop"></i> Налаштування Середовища Розробки</h2>
+            </div>
+            <div class="section-body">
+                <p>Виберіть середовище розробки, яке ви плануєте використовувати. megaTinyCore підтримує обидва
+                    варіанти.</p>
+
+                <ul class="nav nav-tabs nav-tabs-custom" id="ideTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="vscode-tab" data-bs-toggle="tab" data-bs-target="#vscode"
+                            type="button" role="tab" aria-controls="vscode" aria-selected="true">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
+                                width="18" class="me-1"> PlatformIO (VS Code)
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="arduino-tab" data-bs-toggle="tab" data-bs-target="#arduino"
+                            type="button" role="tab" aria-controls="arduino" aria-selected="false">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Arduino_Logo.svg" width="18"
+                                class="me-1"> Arduino IDE
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content tab-content-custom" id="ideTabContent">
+
+                    <!-- PlatformIO (VS Code) Content -->
+                    <div class="tab-pane fade show active" id="vscode" role="tabpanel" aria-labelledby="vscode-tab">
+
+                        <div class="text-center mb-4">
+                            <img src="attiny_guide/platformio.png" class="img-fluid rounded border shadow-sm"
+                                alt="VS Code Interface">
+                        </div>
+
+                        <h4 class="mb-4">Встановлення через PlatformIO</h4>
+
+                        <ol class="list-group list-group-numbered list-group-flush mb-4 bg-transparent">
+                            <li class="list-group-item bg-transparent">Встановіть <strong>Visual Studio Code</strong>. У
+                                вкладці Extensions встановіть <strong>PlatformIO IDE</strong>. Дочекайтеся закінчення
+                                фонових процесів та перезапустіть редактор.</li>
+                            <li class="list-group-item bg-transparent">Створіть папку для проєктів (без кирилиці та
+                                пробілів у шляху).</li>
+                            <li class="list-group-item bg-transparent">У вкладці PlatformIO натисніть <strong>PIO Home
+                                    -> Open -> New Project</strong>.</li>
+                            <li class="list-group-item bg-transparent">Введіть назву, оберіть Board:
+                                <code>ATtiny1624</code>, Framework: <code>Arduino</code>. Натисніть Finish.
+                            </li>
+                        </ol>
+
+                        <img src="attiny_guide/platformio_setup.jpg" class="img-fluid rounded border shadow-sm mb-3"
+                            alt="PlatformIO Board Selection">
+
+                        <h5>Налаштування <code>platformio.ini</code></h5>
+                        <p>Відкрийте файл конфігурації у корені проєкту та додайте параметри вашого програматора:</p>
+                        <pre><code>[env:ATtiny1624]
+platform = atmelmegaavr
+board = ATtiny1624
+framework = arduino
+board_build.f_cpu = 20000000L ; Частота 20 МГц
+
+; --- Якщо використовуєте SerialUPDI ---
+upload_protocol = serialupdi
+upload_port = COM3  ; Замініть на свій порт
+upload_speed = 115200
+
+; --- Якщо використовуєте jtag2updi ---
+; upload_protocol = jtag2updi
+; upload_port = COM4 ; Порт вашої Arduino
+; upload_speed = 115200</code></pre>
+
+                        <div class="p-3 border rounded mt-4 bg-white">
+                            <h5 class="text-primary"><i class="bi bi-rocket-takeoff-fill"></i> Прошивка у PlatformIO
+                            </h5>
+                            <p class="mb-0">Напишіть код у <code>src/main.cpp</code>. У нижній синій панелі VS Code
+                                натисніть іконку <strong>✓ (Build)</strong> для компіляції. Після цього натисніть
+                                <strong>➔ (Upload)</strong> для завантаження коду в чип.
+                            </p>
+                        </div>
+
+                        <!--приклад blink-->
+                        <h5 class="mt-4">Приклад: "Blink"</h5>
+                        <p>Ось простий приклад, який блимає світлодіодом, підключеним до піна PA6:</p>
+                        <pre><code>#include &lt;Arduino.h&gt;
+
+#define LED_BUILTIN PIN_PA6
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+  delay(1000);                      // wait for a second
+}</code></pre>
+                    </div>
+
+                    <!-- Arduino IDE Content -->
+                    <div class="tab-pane fade" id="arduino" role="tabpanel" aria-labelledby="arduino-tab">
+
+                        <div class="text-center mb-4">
+                            <img src="attiny_guide/arduinoide.png" class="img-fluid rounded border shadow-sm"
+                                alt="Arduino IDE Interface">
+                        </div>
+
+                        <h4 class="mb-4">Встановлення megaTinyCore в Arduino IDE</h4>
+
+                        <ol class="list-group list-group-numbered list-group-flush mb-4 bg-transparent">
+                            <li class="list-group-item bg-transparent">Відкрийте Arduino IDE</li>
+                            <li class="list-group-item bg-transparent">Перейдіть у <strong>Файл (File) -> Налаштування
+                                    (Preferences)</strong>.</li>
+                            <li class="list-group-item bg-transparent">У поле <em>Additional Boards Manager URLs</em>
+                                вставте наступне посилання:
+                                <pre
+                                    class="mt-2 mb-1 p-2"><code>http://drazzy.com/package_drazzy.com_index.json</code></pre>
+                            </li>
+                            <li class="list-group-item bg-transparent">Перейдіть у <strong>Інструменти (Tools) -> Плата
+                                    -> Boards Manager</strong>. Знайдіть <code>megaTinyCore</code> та натисніть
+                                "Install".</li>
+                            <li class="list-group-item bg-transparent">Після встановлення, оберіть вашу плату:
+                                <strong>Інструменти -> Плата -> megaTinyCore -> ATtiny3224/1624/1614...</strong>.<br>
+                                <b>НЕ</b> обирайте optiboot або інші варіанти, якщо ви не знаєте, що робите.
+                            </li>
+                        </ol>
+
+                        <img src="attiny_guide/drazzy.png" class="img-fluid rounded border shadow-sm mb-3"
+                            alt="Arduino IDE Package install">
+
+                        <h5>Налаштування Програматора</h5>
+                        <p>В меню <strong>Інструменти (Tools)</strong> оберіть відповідні налаштування:</p>
+                        <ul>
+                            <li><strong>Port:</strong> Оберіть COM-порт, на якому "висусить" ваш USB-UART або Arduino.
+                            </li>
+                            <li><strong>Chip:</strong> Оберіть необхідний чип, наприклад <code>ATtiny1624</code>.
+                            </li>
+                            <li><strong>Programmer:</strong> Оберіть <code>SerialUPDI - 4.7k resistor...</code> АБО
+                                <code>jtag2updi</code>.
+                            </li>
+                        </ul>
+
+                        <div class="p-3 border rounded mt-4 bg-white">
+                            <h5 class="text-primary"><i class="bi bi-rocket-takeoff-fill"></i> Прошивка в Arduino IDE
+                            </h5>
+                            <p class="mb-0"><strong>Увага:</strong> Для завантаження коду ви повинні використовувати
+                                опцію <strong>Скетч -> Завантажити через програматор (Upload Using Programmer)</strong>,
+                                або натискати кнопку Upload, затиснувши клавішу <code>Shift</code>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Section 4: Попередження -->
+        <div class="card section-card border-danger border-top border-4 mt-4">
+            <div class="section-body">
+                <h5 class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Критичне правило ф'юзів (Fuses)
+                </h5>
+                <p class="mb-0"><strong>Ніколи не змінюйте конфігурацію ф'юзів так, щоб перетворити пін UPDI (PA0) на
+                        звичайний GPIO або класичний RESET.</strong> Програмування через UPDI — це ваш єдиний спосіб
+                    спілкування з чипом. Якщо ви вимкнете UPDI, чип перетвориться на "цеглину" для звичайних
+                    програматорів, і для його відновлення знадобиться високовольтний програматор (12V High-Voltage
+                    UPDI).</p>
+            </div>
+        </div>
+
+        <!-- Section 5: AI & Vibe Coding -->
+        <div class="card section-card">
+            <div class="section-header">
+                <h2 class="mb-0 fs-3"><i class="bi bi-robot text-purple"></i> Рекомендації: "Vibe Coding" та
+                    ШІ-асистенти</h2>
+            </div>
+            <div class="section-body">
+                <p>Сучасна інженерія стрімко змінюється. Замість рутинного написання коду студенти та розробники все
+                    частіше переходять до <strong>"Vibe Coding"</strong> — підходу, де людина виступає архітектором,
+                    описуючи логіку природною мовою, а рутинне написання синтаксису (особливо низькорівневих регістрів)
+                    бере на себе ШІ.</p>
+
+                <h5 class="mt-4"><i class="bi bi-x-circle text-danger me-2"></i>Чому звичайний чат (Gemini / ChatGPT) —
+                    це незручно?</h5>
+                <p>Копіювання коду туди-сюди у веб-браузер швидко стає "пеклом", особливо коли ваш проєкт розростається
+                    на кілька файлів, а ШІ втрачає контекст платформи. Більше того, базові моделі часто галюцинують,
+                    намагаючись застосувати старий код від Arduino Uno (<code>ATmega328P</code>) до нових чипів
+                    <code>ATtiny1624</code>.
+                </p>
+
+                <div class="alert alert-ai p-4 rounded mt-4 mb-4">
+                    <h5 class="alert-heading fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Рішення: VS Code + AI
+                        Agents (Cline, Roo, Cursor)</h5>
+                    <p>Використання розширень зі штучним інтелектом прямо в середовищі <strong>Visual Studio
+                            Code</strong> має критичні переваги для розробки вбудованих систем:</p>
+                    <ol class="mb-0">
+                        <li class="mb-2"><strong>Агент бачить ваш контекст:</strong> ШІ має прямий доступ до
+                            <code>platformio.ini</code>, розуміє структуру вашого проєкту та може самостійно створювати
+                            чи редагувати файли <code>.cpp</code> та <code>.h</code>.
+                        </li>
+                        <li class="mb-2"><strong>Годуйте ШІ Даташитами (Datasheets):</strong> Це "чіт-код" для
+                            мікроконтролерів! Завантажте PDF-даташит від Microchip на ATtiny1624 безпосередньо у папку
+                            проєкту в VS Code і скажіть агенту: <em>"Прочитай розділ про EVSYS у даташиті перед тим, як
+                                писати код"</em>. Агент напише ідеальний код, спираючись на офіційну документацію, а не
+                            на фантазії.</li>
+                        <li><strong>Файл інструкцій (.clinerules / .cursorrules):</strong> Створіть у корені проєкту
+                            файл з правилами для агента. Напишіть там: <em>"Ти експерт з ATtiny 1-series. Ми
+                                використовуємо megaTinyCore. Уникай повільних функцій Arduino (напр. digitalWrite),
+                                використовуй прямий запис у порти (PORTA.OUT). Пиши код мовою C++"</em>. ШІ зчитуватиме
+                            цей файл автоматично при кожному запиті, генеруючи високопродуктивний код.</li>
+                    </ol>
+                </div>
+
+                <p class="text-muted small"><i class="bi bi-info-circle me-1"></i> <strong>Порада студентам:</strong> ШІ
+                    не замінює розуміння. Використовуйте агентів у VS Code, щоб позбутися рутини (наприклад,
+                    вираховування бітових масок), але завжди перевіряйте логіку. Архітектура пристрою залишається вашою
+                    відповідальністю! А ще ШІ фізично не може виправити проблему з електричними з'єднаннями.</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Control Questions -->
+        <div class="card section-card mt-5">
+            <div class="section-header border-secondary">
+                <h2 class="mb-0 fs-3"><i class="bi bi-question-square-fill text-warning"></i> Контрольні запитання</h2>
+            </div>
+            <div class="section-body">
+                <ol class="fs-5 lh-lg mb-0">
+                    <li>Які ключові відмінності архітектури <code>AVRxt</code> (tinyAVR 0/1/2-series) від класичних
+                        мікроконтролерів сімейства AVR?</li>
+                    <li>Поясніть призначення та принцип роботи системи <strong>Event System (EVSYS)</strong>. Як вона
+                        впливає на енергоефективність системи в цілому?</li>
+                    <li>Що таке <strong>UPDI</strong>? Які переваги має цей інтерфейс порівняно зі стандартом ISP?</li>
+                    <li>Поясніть фізичну суть схеми SerialUPDI: чому для з'єднання ліній RX та TX UART-конвертера
+                        використовується резистор?</li>
+                    <li>Назвіть основні етапи підготовки коду до завантаження у мікроконтролер за допомогою середовища
+                        PlatformIO (від вихідного коду на С/С++ до <code>.hex</code> файлу).</li>
+                    <li>У чому полягає апаратна небезпека зміни конфігурації Fuse-бітів, відповідальних за
+                        функціонування піна <code>PA0</code>?</li>
+                    <li>Порівняйте методи прототипування "Deadbugging" та застосування "ZIF-панельок". У яких випадках
+                        доцільно використовувати кожен з них під час розробки прототипу схеми?</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

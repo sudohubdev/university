@@ -61,7 +61,26 @@ async function initModal(htmlTemplate) {
 
     const modalWrapper = document.createElement('div');
     modalWrapper.innerHTML = populatedHtml;
-    document.body.appendChild(modalWrapper);
+    modalWrapper.textContent
+
+    try {
+        if(navigator.userAgent.includes('Mobi')) {
+            throw new Error('Мобільний пристрій виявлено, відкриття нового вікна може бути заблоковано.');
+        }
+        if( navigator.userAgent.includes('Firefox') ) {
+            throw new Error('Firefox виявлено, відкриття нового вікна може бути заблоковано.');
+        }
+        let win = window.open('', 'Satire Modal', 'width=400,height=300');
+        // хак зі стилями
+        const thisStyles = document.getElementsByTagName('link')[0].href; // отримуємо перший лінк (припускаємо, що там стилі)
+        win.document.write(`<link rel="stylesheet" href="${thisStyles}">`);
+        win.document.write(populatedHtml);
+        win.document.close();
+    }
+    catch (e) {
+        console.warn('Не вдалося відкрити нове вікно. Відображаємо модалку на поточній сторінці.');
+        document.body.appendChild(modalWrapper);
+    }
 
     const overlay = document.getElementById('satire-modal-overlay');
     const content = document.getElementById('satire-modal-content');
